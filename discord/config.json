@@ -1,0 +1,35 @@
+{
+    "botDeveloper": "Raunak Raj#0060",
+    "botDeveloperId": "554289787859632156",
+    "botInvite": "https://discord.com/api/oauth2/authorize?client_id=833607908104732672&permissions=8&scope=bot",
+    "voteBot": "https://top.gg/bot/833607908104732672/vote",
+    "supportServer": "https://discord.gg/Rgj6e8Tuq5",
+
+    "currencyIcon": "💵 ",
+    
+    "fishingPolePrice": 10000,
+    "huntingRiflePrice": 10000,
+    "shovelPrice": 10000,
+
+    "dailyCooldown": 43200000,
+    "workCooldown": 14400000,
+    "fishCooldown": 3600000,
+    "huntCooldown": 3600000,
+    "digCooldown": 3600000,
+    "quizCooldown": 20000,
+    "rpsCooldown": 20000,
+
+    "guildCreateLogsChannelId": "833951839665520710",
+    "guildDeleteLogsChannelId": "833951839665520710",
+    "dmLogsChannelId": "850026236372844554",
+        
+    "dbl_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgzMzYwNzkwODEwNDczMjY3MiIsImJvdCI6dHJ1ZSwiaWF0IjoxNjIwMTk1ODIzfQ.GQVa9x66ic8uPoRHC-Y20fq3aLVKonJZNrnrE7URnCQ",
+
+    "mainToken": "ODMzNjA3OTA4MTA0NzMyNjcy.YH0z3A.jWlK30-3hPHojTiUr9CfFiRkxlY",
+    "mainId": "833607908104732672",
+    "mainPrefix": ">",
+
+    "betaToken": "ODY4MDI1ODE2NTIzNjIwMzUz.YPpqCQ.UapGg8JOzERSleqMsGj3TvKJk-Y",
+    "betaId": "868025816523620353",
+    "betaPrefix": ">>"
+}

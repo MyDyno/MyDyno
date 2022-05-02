@@ -1,0 +1,59 @@
+const express = require('express')
+const app = express()
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
+module.exports = {io: io}
+const mongoose = require('mongoose');
+const session = require('express-session')
+const MongoDBSession = require('connect-mongodb-session')(session)
+const config = require('./config.json')
+
+const discordRouter = require('./routes/discord')
+const chatRouter = require('./routes/chat')
+const accountRouter = require('./routes/account')
+const novelcovidRouter = require('./routes/novelcovid')
+const redirectRouter = require('./routes/redirect')
+
+mongoose.connect(config.mongodb_url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+})
+.then(() => {
+    console.log('Connected to mongoose!')
+})
+.catch((err) => {
+    console.log('Couldn\'t connet to mongoose! Error: ' + err)
+})
+
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: false }))
+app.use('/assets', express.static('assets'))
+
+const store = new MongoDBSession({
+    uri: config.mongodb_url,
+    collection: 'loginSessions'
+})
+app.use(session({
+    secret: config.session_secret,
+    resave: false,
+    saveUninitialized: false,
+    maxAge: Date.now() + (1 * 86400 * 1000),
+    store: store
+}))
+
+app.use('/discord', discordRouter.app)
+app.use('/chat', chatRouter.app)
+app.use('/account', accountRouter.app)
+app.use('/novelcovid', novelcovidRouter.app)
+app.use('/redirect', redirectRouter.app)
+
+app.get('/', (req, res) => {
+    res.render('home', {req: req})
+})
+
+let port = process.env.PORT || 5000 || 8000
+server.listen(port, () => {
+    console.log('listening at port: ' + port)
+})

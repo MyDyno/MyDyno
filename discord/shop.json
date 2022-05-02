@@ -1,0 +1,40 @@
+{
+    "shop": [
+        {
+            "name": "Fishing Pole",
+            "buyName": "fishingpole",
+            "description": "Use it to fish!",
+            "emoji": "🎣 ",
+            "indexValue": 1,
+            "price": 10000,
+            "sellingPrice": 1000
+        },
+        {
+            "name": "Hunting Rifle",
+            "buyName": "huntingrifle",
+            "description": "Use it to hunt!",
+            "emoji": "🔫 ",
+            "indexValue": 2,
+            "price": 10000,
+            "sellingPrice": 1000
+        },
+        {
+            "name": "Shovel",
+            "buyName": "shovel",
+            "description": "Use it to dig!",
+            "emoji": "⛏️ ",
+            "indexValue": 3,
+            "price": 10000,
+            "sellingPrice": 1000
+        },
+        {
+            "name": "Trash",
+            "buyName": "trash",
+            "description": "It does nothing!",
+            "emoji": "🥫 ",
+            "indexValue": 4,
+            "price": 50,
+            "sellingPrice": 50
+        }
+    ]
+}

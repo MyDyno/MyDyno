@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid justify-content-between">
+
+      <div class="d-flex">
+        <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="/">
+
+          <!-- <% if(req.session.isAuth){ %>
+
+            <img src="<%= req.session.icon %>" height="30" class="rounded-circle">
+            &nbsp;&nbsp;
+            <%= req.session.username %>
+
+          <% } else{ %>
+
+            <img src="https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png" height="30" class="rounded-circle">
+            &nbsp;&nbsp;
+            Not Logged In
+
+          <% } %> -->
+
+          <img src="https://images.discordapp.net/avatars/833607908104732672/79f05ffee31a963cdf03ccbf8d1774de.png?size=128" height="40" class="rounded-circle">
+          &nbsp;&nbsp;
+          MyDyno
+          
+        </a>
+      </div>
+  
+      <ul class="navbar-nav flex-row">
+
+        <li class="nav-item me-3 me-lg-1 active">
+          <a class="nav-link" href="/">
+            <span><i class="fas fa-home fa-lg"></i></span>
+          </a>
+        </li>
+
+        <li class="nav-item me-3 me-lg-1 active">
+          <a class="nav-link" href="/discord">
+            <span><i class="fab fa-discord fa-lg"></i></span>
+          </a>
+        </li>
+
+        <li class="nav-item me-3 me-lg-1">
+          <a class="nav-link" href="/chat">
+            <span><i class="fas fa-comments fa-lg"></i></span>
+          </a>
+        </li>
+
+        <li class="nav-item me-3 me-lg-1">
+          <a class="nav-link" href="/novelcovid">
+            <span><i class="fas fa-virus fa-lg"></i></span>
+          </a>
+        </li>
+
+        <% if(req.session.isAuth){ %>
+
+          <!-- <li class="nav-item me-3 me-lg-1">
+            <a class="nav-link" href="/account/settings">
+              <span><i class="fas fa-cog fa-lg"></i></span>
+            </a>
+          </li> -->
+
+          <li class="nav-item me-3 me-lg-1">
+            <a class="nav-link" href="/account/settings">
+              <span>
+                <img src="<%= req.session.icon %>" height="27" class="rounded-circle">
+              </span>
+              &nbsp;&nbsp;<%= req.session.username %>
+            </a>
+          </li>
+
+        <% } else{ %>
+
+          <li class="nav-item me-3 me-lg-1">
+            <a class="nav-link" href="/account/login">
+              <span><i class="fas fa-sign-in-alt fa-lg"></i></span>
+            </a>
+          </li>
+
+        <% } %>
+
+      </ul>
+    </div>
+</nav>

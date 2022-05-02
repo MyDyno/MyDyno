@@ -1,0 +1,390 @@
+<style>
+.c-interaction {
+	 /* background-color: #643cff; */
+     background-color: black;
+	 /* width: 250px; */
+	 height: 60px;
+	 /* border-radius: 100rem; */
+	 display: flex;
+	 align-items: center;
+	 padding: 1rem;
+	 overflow: hidden;
+	 position: relative;
+	 transform-origin: 0 0;
+	 box-shadow: 1px 6px 20px 3px rgba(187, 153, 255, 0.4);
+}
+ .c-interaction__button {
+	 border-radius: 100rem;
+	 border: 0;
+	 background: #8364ff;
+	 min-width: 50px;
+	 min-height: 45px;
+	 display: inline-block;
+	 margin: 0;
+	 cursor: pointer;
+	 position: relative;
+}
+ .c-interaction__button:after {
+	 content: '';
+	 width: 100%;
+	 height: 100%;
+	 top: 0;
+	 left: 0;
+	 transform: scale(0);
+	 background: rgba(100, 75, 198, 0.5);
+	 transition: 0.15s ease;
+	 position: absolute;
+	 border-radius: inherit;
+}
+ .c-interaction__button:hover svg {
+	 transform: scale(0.9);
+}
+ .c-interaction__button:hover:after {
+	 transform: scale(1);
+}
+ .c-interaction__button svg {
+	 color: #fff;
+	 z-index: 2;
+	 position: relative;
+	 transform: scale(1);
+	 transition: 0.4s ease;
+}
+ .c-interaction__input {
+	 transition: 0.6s ease;
+	 background: #8364ff;
+	 border: 0;
+	 padding: 1rem;
+	 border-radius: 100rem;
+     height: 45px;
+	 width: 100%;
+	 margin-left: 1rem;
+	 color: #fff;
+	 font-size: 1rem;
+	 letter-spacing: 1.3px;
+	 transform: rotate(0deg);
+	 transform-origin: -68px 0px;
+}
+ .c-interaction__input::placeholder {
+	 color: #b9f;
+}
+ .c-interaction__menu {
+	 position: absolute;
+	 left: 73px;
+	 transform: rotate(90deg);
+	 transform-origin: -200px 10px;
+	 transition: 0.4s ease;
+}
+ .c-interaction__menu ul {
+	 margin: 0;
+	 padding: 0;
+	 display: flex;
+}
+ .c-interaction__menu li {
+	 margin: 0 0.5rem;
+	 list-style: none;
+}
+ .c-interaction__options input {
+	 transition: 0.6s ease;
+	 transform: rotate(-90deg);
+}
+ .c-interaction__options .c-interaction__menu {
+	 transform: rotate(0);
+	 transition: 0.4s ease;
+}
+ .vh {
+	 position: absolute !important;
+	 height: 1px;
+	 width: 1px;
+	 overflow: hidden;
+	 clip: rect(1px 1px 1px 1px);
+	/* IE6, IE7 */
+	 clip: rect(1px, 1px, 1px, 1px);
+}
+.chat-list {
+    padding: 0;
+    font-size: .8rem;
+}
+
+.chat-list li {
+    margin-bottom: 10px;
+    overflow: auto;
+    color: #ffffff;
+}
+
+.chat-list .chat-img {
+    float: left;
+    width: 48px;
+}
+
+.chat-list .chat-img img {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    width: 100%;
+}
+
+.chat-list .chat-message {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    background: #5a99ee;
+    display: inline-block;
+    padding: 10px 20px;
+    position: relative;
+}
+
+.chat-list .chat-message:before {
+    content: "";
+    position: absolute;
+    top: 15px;
+    width: 0;
+    height: 0;
+}
+
+.chat-list .chat-message h5 {
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    line-height: 100%;
+    font-size: .9rem;
+}
+
+.chat-list .chat-message p {
+    line-height: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-list .chat-body {
+    margin-left: 20px;
+    float: left;
+    width: 70%;
+}
+
+.chat-list .in .chat-message:before {
+    left: -12px;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid #5a99ee;
+}
+
+.chat-list .out .chat-img {
+    float: right;
+}
+
+.chat-list .out .chat-body {
+    float: right;
+    margin-right: 20px;
+    text-align: right;
+}
+
+.chat-list .out .chat-message {
+    background: #fc6d4c;
+}
+
+.chat-list .out .chat-message:before {
+    right: -12px;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid #fc6d4c;
+}
+
+.card .card-header:first-child {
+    -webkit-border-radius: 0.3rem 0.3rem 0 0;
+    -moz-border-radius: 0.3rem 0.3rem 0 0;
+    border-radius: 0.3rem 0.3rem 0 0;
+}
+.card .card-header {
+    background: #17202b;
+    border: 0;
+    font-size: 1rem;
+    padding: .65rem 1rem;
+    position: relative;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.content{
+    margin-top:40px;    
+}
+
+.scroll {
+  margin:4px, 4px;
+  padding:4px;
+  height: 505px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
+}
+</style>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<br><br><br><br><br>
+
+<div class="container content">
+    <div class="row">
+        <div>
+
+        	<div class="card">
+
+        		<div class="card-header">
+                    Chat
+                    <div style="float: right;">
+                        <label for="autoScrollCheckbox">Auto Scroll</label>
+                        <input type="checkbox" id="autoScrollCheckbox" checked>
+                    </div>
+                </div>
+
+        		<div class="card-body height3">
+        			<ul class="chat-list">
+
+                        <div id="messages" class="scroll">
+
+                            <% message.forEach((message) => { %>
+
+                                <% if(message.username == req.session.username){ %>
+
+                                    <li class="out">
+                                        <div class="chat-img">
+                                            <img alt="Avtar" src="<%= message.icon %>">
+                                        </div>
+                                        <div class="chat-body">
+                                            <div class="chat-message">
+                                                <h5><%= message.username %></h5>
+                                                <p><%= message.message %></p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                <% }else{ %>
+
+                                    <li class="in">
+                                        <div class="chat-img">
+                                            <img alt="Avtar" src="<%= message.icon %>">
+                                        </div>
+                                        <div class="chat-body">
+                                            <div class="chat-message">
+                                                <h5><%= message.username %></h5>
+                                                <p><%= message.message %></p>
+                                            </div>
+                                        </div>
+                                    </li>                                    
+
+                                <% } %>
+
+                            <% }) %>
+
+                        </div>
+
+        			</ul>
+        		</div>
+
+                <div>
+
+                    <form id="formPost" class='c-interaction'>
+                        
+                        <% if(req.session.isAuth){ %>
+                            <button type="button" aria-label="Toggle more options." class='c-interaction__toggle c-interaction__button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class='vh' for='message'>Message:</label>
+                            <input required class='c-interaction__input' type='text' id='message' placeholder='Message' maxlength="2000">
+                        <% } else{ %>
+                            <button disabled type="button" aria-label="Toggle more options." class='c-interaction__toggle c-interaction__button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><path d="M12 5v14M5 12h14"/></svg></button>
+                            <label class='vh' for='message'>Message:</label>
+                            <input disabled required class='c-interaction__input' type='text' id='message' placeholder='Login required!' maxlength="2000">
+                        <% } %>   
+                      
+                        <div class='c-interaction__menu'>
+                            <ul>
+                                <li><button type="button" aria-label="Record a Video." class='c-interaction__button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></button></li>
+                                <li><button type="button" aria-label="Take a Picture." class='c-interaction__button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></button></li>
+                                <li><button type="button" aria-label="Upload an Image." class='c-interaction__button'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></button></li>
+                            </ul>
+                        </div>
+
+                    </form>
+
+                </div>
+                
+        	</div>
+
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+const socket = io('<%= config.socket_url %>')
+let messageContainer = document.getElementById('messages')
+let inputBox = document.getElementById('message')
+let form = document.getElementById('formPost')
+let autoScrollCheckbox = document.getElementById('autoScrollCheckbox')
+if(autoScrollCheckbox.checked == true){
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+}
+
+const interaction = document.querySelector('.c-interaction');
+const toggleButton = document.querySelector('.c-interaction__toggle')
+
+toggleButton.addEventListener('click',() => {
+  interaction.classList.toggle('c-interaction__options')
+})
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    let myMessage = 
+    `
+    <li class="out">
+      <div class="chat-img">
+        <img alt="Avtar" src="<%= req.session.icon %>">
+      </div>
+      <div class="chat-body">
+        <div class="chat-message">
+          <h5><%= req.session.username %></h5>
+          <p>${inputBox.value}</p>
+        </div>
+      </div>
+    </li>
+    `
+    appendElement(myMessage)
+    let object = new Array('<%= req.session.icon %>', '<%= req.session.username %>', inputBox.value)
+    socket.emit('sendMessage', object)
+    if(autoScrollCheckbox.checked == true){
+      messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+    inputBox.value = ''
+})
+
+socket.on('Message', (data) => {
+
+    let messageClass;
+    if( data[1] == '<%= req.session.username %>'){
+      messageClass = 'out'
+    }
+    else{
+      messageClass = 'in'
+    }
+    let message = 
+    `
+    <li class="${messageClass}">
+      <div class="chat-img">
+        <img alt="Avtar" src="${data[0]}">
+      </div>
+      <div class="chat-body">
+        <div class="chat-message">
+          <h5>${data[1]}</h5>
+          <p>${data[2]}</p>
+        </div>
+      </div>
+    </li>
+    `
+    appendElement(message)
+    if(autoScrollCheckbox.checked == true){
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
+})
+
+function appendElement(message){
+    const messageElement = document.createElement('div')
+    messageElement.innerHTML = message
+    messageContainer.append(messageElement)
+}
+</script>
