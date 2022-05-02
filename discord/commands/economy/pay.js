@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 
 module.exports = {
@@ -95,7 +94,7 @@ module.exports = {
                 const payedCash = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription('Successfully payed `' + config.currencyIcon + args[2] + '` to `' + mentionUser.tag + '`')
+                    .setDescription('Successfully payed `' + client.config.currencyIcon + args[2] + '` to `' + mentionUser.tag + '`')
 
                 message.channel.send({embeds: [payedCash]})
             })

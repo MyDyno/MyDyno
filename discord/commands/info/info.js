@@ -1,5 +1,3 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: 'info',
 
@@ -21,9 +19,9 @@ module.exports = {
             .addFields(
                 {
                     name: client.user.username + ' Info',
-                    value: 'My name is `' + client.user.username + '` and I was developed by `' + config.botDeveloper +
-                    '`! I am a fun, music economy, moderation and game bot! If you like me you can [invite me](' + config.botInvite + '). Currently I am being used in `' + client.guilds.cache.size +
-                    '` servers! You can also [vote me](' + config.voteBot + ') and if you  are having any trouble you can also join the [support server](' + config.supportServer + ')',
+                    value: 'My name is `' + client.user.username + '` and I was developed by `' + client.config.botDeveloper +
+                    '`! I am a fun, music economy, moderation and game bot! If you like me you can [invite me](' + client.config.botInvite + '). Currently I am being used in `' + client.guilds.cache.size +
+                    '` servers! You can also [vote me](' + client.config.voteBot + ') and if you  are having any trouble you can also join the [support server](' + client.config.supportServer + ')',
                 },
                 {
                     name: 'Uptime',

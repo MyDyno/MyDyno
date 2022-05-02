@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const cooldownModel = require('../../../models/discord/cooldown')
 
@@ -10,7 +9,7 @@ module.exports = {
         let myModel = await model.findOne({userId: message.author.id})
         let cooldown = await cooldownModel.findOne({userId: message.author.id})
         let todayDate = new Date().getTime()
-        let storeDate = Number(new Date().getTime()) + Number(config.dailyCooldown)
+        let storeDate = Number(new Date().getTime()) + Number(client.config.dailyCooldown)
         let randomMoney = Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
 
         if(!myModel){
@@ -71,7 +70,7 @@ module.exports = {
                 const dailyEarnedEmbed = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription('✅ You recieved your daily `' + config.currencyIcon + randomMoney + '`')
+                    .setDescription('✅ You recieved your daily `' + client.config.currencyIcon + randomMoney + '`')
                     .setTimestamp()
                     .setFooter(client.user.username);
     

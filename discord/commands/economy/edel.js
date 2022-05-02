@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const cooldownModel = require('../../../models/discord/cooldown')
 

@@ -1,5 +1,3 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: 'help',
 
@@ -65,7 +63,7 @@ module.exports = {
         //             value: '`mp3`' 
         //         }
         //     )
-        //     .setFooter(client.user.username + ' developed by ' + config.botDeveloper)
+        //     .setFooter(client.user.username + ' developed by ' + client.config.botDeveloper)
 
         // message.channel.send({ embeds: [embed] })
         
@@ -84,12 +82,12 @@ module.exports = {
                 {
                     name: 'Links:',
                     value:
-                        ':small_blue_diamond: [Invite](' + config.botInvite + ')' + '\n' +
-                        ':small_blue_diamond: [Vote - Top.gg](' + config.voteBot + ')' + '\n' +
-                        ':small_blue_diamond: [Support Server](' + config.supportServer + ')' + '\n'
+                        ':small_blue_diamond: [Invite](' + client.config.botInvite + ')' + '\n' +
+                        ':small_blue_diamond: [Vote - Top.gg](' + client.config.voteBot + ')' + '\n' +
+                        ':small_blue_diamond: [Support Server](' + client.config.supportServer + ')' + '\n'
                 }
             )
-            .setFooter(client.user.username + ' developed by ' + config.botDeveloper)
+            .setFooter(client.user.username + ' developed by ' + client.config.botDeveloper)
 
         message.channel.send({embeds: [helpEmbed]})
     }

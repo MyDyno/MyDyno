@@ -1,6 +1,3 @@
-const config = require('../config.json')
-let PREFIX;
-let token = process.env.token || config.betaToken
 const settingModel = require('../../models/discord/setting')
 const fs = require('fs');
 
@@ -9,10 +6,13 @@ module.exports = {
 
     async execute(message, Discord, client){
 
+        let token = process.env.token || client.config.betaToken
+        let PREFIX;
+
         if(message.author.bot) return;
 
         if(message.channel.type == 'DM'){            
-            let dmLogsChannel = client.channels.cache.find(channel => channel.id == config.dmLogsChannelId)
+            let dmLogsChannel = client.channels.cache.find(channel => channel.id == client.config.dmLogsChannelId)
             const dm = new Discord.MessageEmbed()
                 .setColor('BLUE')
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -26,15 +26,15 @@ module.exports = {
         let model = await settingModel.findOne({guildId: message.guild.id})
 
         if(token == process.env.token){
-            PREFIX = config.mainPrefix
+            PREFIX = client.config.mainPrefix
             if(model){
                 if(model.prefix){
                     PREFIX = model.prefix
                 }
             }
         }
-        else if(token == config.betaToken){
-            PREFIX = config.betaPrefix   
+        else if(token == client.config.betaToken){
+            PREFIX = client.config.betaPrefix   
         }
 
         let args = message.content.substring(PREFIX.length).split(' ')

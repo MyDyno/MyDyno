@@ -1,5 +1,3 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: 'eval',
 
@@ -10,7 +8,7 @@ module.exports = {
             else return text;
         }
 
-        if (message.author.id == config.botDeveloperId) {
+        if (message.author.id == client.config.botDeveloperId) {
 
             try {
                 const code = args.join(" ");

@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 
 module.exports = {
@@ -29,12 +28,12 @@ module.exports = {
                 .addFields(
                     {   
                         name: 'Cash',
-                        value: config.currencyIcon + myModel.cash,
+                        value: client.config.currencyIcon + myModel.cash,
                         inline: true,
                     },
                     {
                         name: 'Bank',
-                        value: config.currencyIcon + myModel.bank,
+                        value: client.config.currencyIcon + myModel.bank,
                         inline: true,
                     },
                 )
@@ -63,12 +62,12 @@ module.exports = {
                 .addFields(
                     {
                         name: 'Cash',
-                        value: config.currencyIcon + mentionUserModel.cash,
+                        value: client.config.currencyIcon + mentionUserModel.cash,
                         inline: true,
                     },
                     {
                         name: 'Bank',
-                        value: config.currencyIcon + mentionUserModel.bank,
+                        value: client.config.currencyIcon + mentionUserModel.bank,
                         inline: true,
                     },
                 )

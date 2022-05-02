@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const shopConfig = require('../../shop.json')
 
@@ -25,7 +24,7 @@ module.exports = {
         shopConfig.shop.forEach((item) => {
 
             let toPush = {
-                name: item.emoji + item.name + ' - Price `' + config.currencyIcon + item.price + '`',
+                name: item.emoji + item.name + ' - Price `' + client.config.currencyIcon + item.price + '`',
                 value: '`' + PREFIX + 'buy ' + item.buyName + '`'
             }
 

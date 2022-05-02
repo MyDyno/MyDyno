@@ -34,15 +34,15 @@ async function main(){
             partials: ["CHANNEL"]
         }
     );
-    const config = require('./config.json')
+    client.config = require('./config.json')
     const fs = require('fs');
-    let token = process.env.token || config.betaToken
+    let token = process.env.token || client.config.betaToken
     client.commands = new Discord.Collection();
     client.events = new Discord.Collection();
 
     if(token == process.env.token){
         const { AutoPoster } = require('topgg-autoposter')
-        const ap = AutoPoster(config.dbl_token, client)
+        const ap = AutoPoster(client.config.dbl_token, client)
         ap.on('posted', () => {
             console.log('Posted discord bot stats to Top.gg!')
         })

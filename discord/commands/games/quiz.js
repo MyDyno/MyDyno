@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const fetch = require('node-fetch')
 const cooldownModel = require('../../../models/discord/cooldown')
@@ -11,7 +10,7 @@ module.exports = {
         let myModel = await model.findOne({userId: message.author.id})
         let cooldown = await cooldownModel.findOne({userId: message.author.id})
         let todayDate = new Date().getTime()
-        let storeDate = Number(new Date().getTime()) + Number(config.quizCooldown)
+        let storeDate = Number(new Date().getTime()) + Number(client.config.quizCooldown)
         let quiz_type_api_link = "https://opentdb.com/api.php?amount=5&category=9&type=boolean";
         let randomMoney = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
      
@@ -129,7 +128,7 @@ module.exports = {
                                             },
                                             {
                                                 name: 'Result',
-                                                value: '✅ Yey you got the correct answer and won `' + config.currencyIcon + randomMoney + '`!',
+                                                value: '✅ Yey you got the correct answer and won `' + client.config.currencyIcon + randomMoney + '`!',
                                                 inline: false,
                                             }
                                         )
@@ -162,7 +161,7 @@ module.exports = {
                                             },
                                             {
                                                 name: 'Result',
-                                                value: '✅ Yey you got the correct answer and won `' + config.currencyIcon + randomMoney + '`!',
+                                                value: '✅ Yey you got the correct answer and won `' + client.config.currencyIcon + randomMoney + '`!',
                                                 inline: false,
                                             }
                                         )

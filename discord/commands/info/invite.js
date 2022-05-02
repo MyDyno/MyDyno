@@ -1,5 +1,3 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: 'invite',
 
@@ -7,7 +5,7 @@ module.exports = {
         
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
-            .setDescription('[Invite me](' + config.botInvite + ')')
+            .setDescription('[Invite me](' + client.config.botInvite + ')')
 
         message.channel.send({ embeds: [embed] })
         

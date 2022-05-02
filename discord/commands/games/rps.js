@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const cooldownModel = require('../../../models/discord/cooldown')
 
@@ -12,7 +11,7 @@ module.exports = {
         let myModel = await model.findOne({userId: message.author.id})
         let cooldown = await cooldownModel.findOne({userId: message.author.id})
         let todayDate = new Date().getTime()
-        let storeDate = Number(new Date().getTime()) + Number(config.rpsCooldown)
+        let storeDate = Number(new Date().getTime()) + Number(client.config.rpsCooldown)
         let randomMoney = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
      
         if(!myModel){
@@ -99,7 +98,7 @@ module.exports = {
                                 .setColor('GREEN')
                                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                 .setDescription(
-                                    '✅ Yey you won `' + config.currencyIcon + randomMoney + '`' + 
+                                    '✅ Yey you won `' + client.config.currencyIcon + randomMoney + '`' + 
                                     '\n\n ' + 
                                     'Choices:' + 
                                     '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'

@@ -1,12 +1,10 @@
-const config = require('../../config.json')
-
 module.exports = {
     name: 'advertise',
     alts: ['adv'],
 
     async execute(Discord, client, message, args, PREFIX){
         
-        if(message.author.id == config.botDeveloperId){
+        if(message.author.id == client.config.botDeveloperId){
 
             let advertisement1 = new Discord.MessageEmbed()
                 .setColor('BLUE')
@@ -16,13 +14,13 @@ module.exports = {
                     '\n\n' +
                     'This message was sent to you by me `Raunak Raj#0060` **VERY SORRY IF IT LOOKS LIKE SPAM** and also to everyone from the mutual servers because we need your support to grow across servers!' + 
                     '\n\n' +
-                    '[Click here](' + config.botInvite + ') to invite me to your server! Add me to your server, try out some commands, if you like it, please also recommend this bot to your friends :)'
+                    '[Click here](' + client.config.botInvite + ') to invite me to your server! Add me to your server, try out some commands, if you like it, please also recommend this bot to your friends :)'
                     
                 )
             
             let advertisement2 = new Discord.MessageEmbed()
                 .setColor('BLUE')
-                .setDescription('Invite me: ' + config.botInvite)
+                .setDescription('Invite me: ' + client.config.botInvite)
                 .setTimestamp()
                 .setFooter(client.user.username)
 

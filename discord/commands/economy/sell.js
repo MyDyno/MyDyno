@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const shopConfig = require('../../shop.json')
 
@@ -49,7 +48,7 @@ module.exports = {
                 const boughtEmbed = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription('Successfully sold ' + sellItem.name + ' for `' + config.currencyIcon + sellItem.sellingPrice + '`')
+                    .setDescription('Successfully sold ' + sellItem.name + ' for `' + client.config.currencyIcon + sellItem.sellingPrice + '`')
 
                 message.channel.send({embeds: [boughtEmbed]})
             })

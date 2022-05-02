@@ -1,11 +1,9 @@
-const config = require('../config.json')
-
 module.exports = {
     name: 'guildCreate',
 
     execute(guild, Discord, client){
         
-        const logsChannel = client.channels.cache.get(config.guildCreateLogsChannelId)
+        const logsChannel = client.channels.cache.get(client.config.guildCreateLogsChannelId)
         const logMessage = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setThumbnail(guild.iconURL())

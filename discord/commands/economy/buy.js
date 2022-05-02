@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const model = require('../../../models/discord/economy')
 const shopConfig = require('../../shop.json')
 
@@ -49,7 +48,7 @@ module.exports = {
                 const notEnoughCash = new Discord.MessageEmbed()
                     .setColor('RED')
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription('You dont have `' + config.currencyIcon + buyItem.price + '` to buy ' + buyItem.name + '.\nTry `bal` command to check your balance!')
+                    .setDescription('You dont have `' + client.config.currencyIcon + buyItem.price + '` to buy ' + buyItem.name + '.\nTry `bal` command to check your balance!')
 
                 return message.channel.send({embeds: [notEnoughCash]})
             }
@@ -78,7 +77,7 @@ module.exports = {
                 const boughtEmbed = new Discord.MessageEmbed()
                     .setColor('GREEN')
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setDescription('Successfully bought ' + buyItem.name + ' for `' + config.currencyIcon + buyItem.price + '`')
+                    .setDescription('Successfully bought ' + buyItem.name + ' for `' + client.config.currencyIcon + buyItem.price + '`')
 
                 message.channel.send({embeds: [boughtEmbed]})
             })

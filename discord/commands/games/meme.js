@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const got = require('got')
 
 module.exports = {

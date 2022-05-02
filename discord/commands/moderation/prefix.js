@@ -1,4 +1,3 @@
-const config = require('../../config.json')
 const settingModel = require('../../../models/discord/setting')
 
 module.exports = {
