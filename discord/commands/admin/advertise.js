@@ -2,6 +2,7 @@ const config = require('../../config.json')
 
 module.exports = {
     name: 'advertise',
+    alts: ['adv'],
 
     async execute(Discord, client, message, args, PREFIX){
         
@@ -11,7 +12,7 @@ module.exports = {
                 .setColor('BLUE')
                 .setThumbnail(client.user.displayAvatarURL())
                 .setDescription(
-                    'Hi there, I am a fun and game bot used in over `' + client.guilds.cache.size + ' servers` Try out my game commands `' + PREFIX + 'rps` or `' + PREIFX + 'quiz`! Please support us if u like it!' +
+                    'Hi there, I am a fun and game bot used in over `' + client.guilds.cache.size + ' servers` Try out my game commands `' + PREFIX + 'rps` or `' + PREFIX + 'quiz`! Please support us if u like it!' +
                     '\n\n' +
                     'This message was sent to you by me `Raunak Raj#0060` **VERY SORRY IF IT LOOKS LIKE SPAM** and also to everyone from the mutual servers because we need your support to grow across servers!' + 
                     '\n\n' +

@@ -54,7 +54,7 @@ module.exports = {
                 if(args[0] == command.name){
                     client.commands.get(command.name).execute(Discord, client, message, args, PREFIX)
                 }
-    
+
                 command.alts.forEach((alt) => {
                     if(args[0] == alt){
                         client.commands.get(alt).execute(Discord, client, message, args, PREFIX)
