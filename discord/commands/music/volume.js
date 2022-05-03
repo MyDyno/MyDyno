@@ -1,6 +1,8 @@
 module.exports = {
     name: 'volume',
 
+    alts: ['vol', 'vl'],
+
     async execute(Discord, client, message, args, PREFIX){
         
         let queue = client.distube.getQueue(message)
