@@ -17,7 +17,7 @@ module.exports = (client, Discord) => {
             }
             command.alts.forEach((alt) => {
                 if(alt){
-                    client.commands.set(alt, command)
+                    client.alts.set(alt, command)
                 }
             })
         }

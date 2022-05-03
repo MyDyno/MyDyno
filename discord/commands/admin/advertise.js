@@ -10,11 +10,11 @@ module.exports = {
                 .setColor('BLUE')
                 .setThumbnail(client.user.displayAvatarURL())
                 .setDescription(
-                    'Hi there, I am a fun and game bot used in over `' + client.guilds.cache.size + ' servers` Try out my game commands `' + PREFIX + 'rps` or `' + PREFIX + 'quiz`! Please support us if u like it!' +
+                    'Hi there, I am a fun, game and music bot used in over `' + client.guilds.cache.size + ' servers` Try out my `music` or `game` commands `' + PREFIX + 'play` or `' + PREFIX + 'rps`! Please support us if u like it!' +
                     '\n\n' +
                     'This message was sent to you by me `Raunak Raj#0060` **VERY SORRY IF IT LOOKS LIKE SPAM** and also to everyone from the mutual servers because we need your support to grow across servers!' + 
                     '\n\n' +
-                    '[Click here](' + client.config.botInvite + ') to invite me to your server! Add me to your server, try out some commands, if you like it, please also recommend this bot to your friends :)'
+                    '[Click here](' + client.config.botInvite + ') to invite me to your server! Add me to your server, try out some `music` commands, if you like it, please also recommend this bot to your friends :)'
                     
                 )
             
@@ -53,6 +53,14 @@ module.exports = {
                 })
             }
             
+        }
+        else{
+
+            const embed = new Discord.MessageEmbed()
+                .setColor('RED')
+                .setDescription(client.emotes.error + ' | This command is limit to the application owner only!')
+
+            return message.channel.send({embeds: [embed]})
         }
         
     }

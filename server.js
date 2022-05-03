@@ -21,10 +21,10 @@ mongoose.connect(config.mongodb_url, {
     useFindAndModify: false
 })
 .then(() => {
-    console.log('Connected to mongoose!')
+    console.log('Database: Connected to mongoose!')
 })
 .catch((err) => {
-    console.log('Couldn\'t connet to mongoose! Error: ' + err)
+    console.log('Database: Couldn\'t connet to mongoose! Error: ' + err)
 })
 
 app.set('view engine', 'ejs')
@@ -55,5 +55,5 @@ app.get('/', (req, res) => {
 
 let port = process.env.PORT || 5000 || 8000
 server.listen(port, () => {
-    console.log('listening at port: ' + port)
+    console.log('Server: listening at port: ' + port)
 })

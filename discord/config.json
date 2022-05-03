@@ -6,6 +6,16 @@
     "supportServer": "https://discord.gg/Rgj6e8Tuq5",
 
     "currencyIcon": "💵 ",
+    "emoji": {
+        "play": "▶️",
+        "stop": "⏹️",
+        "resume": "⏸",
+        "skip": "⏭",
+        "queue": "📄",
+        "success": "☑️",
+        "repeat": "🔁",
+        "error": "❌"
+    },
     
     "fishingPolePrice": 10000,
     "huntingRiflePrice": 10000,

@@ -9,7 +9,6 @@ module.exports = {
         }
 
         console.log('Discord: Logged in as: ' + client.user.tag)
-        console.log('Discord Status: ' + status.type + ' ' + status.activity)
 
         function setStatus(){
             client.user.setActivity(status.activity, {type: status.type});

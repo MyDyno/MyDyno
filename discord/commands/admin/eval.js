@@ -40,6 +40,14 @@ module.exports = {
                 message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
             }
         }
+        else{
+
+            const embed = new Discord.MessageEmbed()
+                .setColor('RED')
+                .setDescription(client.emotes.error + ' | This command is limit to the application owner only!')
+
+            return message.channel.send({embeds: [embed]})
+        }
         
     }
 }

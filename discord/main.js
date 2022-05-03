@@ -38,13 +38,14 @@ async function main(){
     const fs = require('fs');
     let token = process.env.token || client.config.betaToken
     client.commands = new Discord.Collection();
+    client.alts = new Discord.Collection();
     client.events = new Discord.Collection();
 
     if(token == process.env.token){
         const { AutoPoster } = require('topgg-autoposter')
         const ap = AutoPoster(client.config.dbl_token, client)
         ap.on('posted', () => {
-            console.log('Posted discord bot stats to Top.gg!')
+            console.log('Discord: Posted discord bot stats to Top.gg!')
         })
     }
 
@@ -52,6 +53,9 @@ async function main(){
     handlerFiles.forEach(handler => {
         require('./handlers/' + handler)(client, Discord)
     })
+
+    const { music } = require('./music')
+    music(Discord, client)
     
     client.login(token)
     
