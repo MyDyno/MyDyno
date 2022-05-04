@@ -57,7 +57,7 @@ const main = (Discord, client) => {
     })
     .on('empty', (queue) => {
         const embed = new Discord.MessageEmbed()
-            .setColor('BLUE')
+            .setColor('RED')
             .setDescription(client.emotes.error + ' | Voice channel is empty! Leaving the channel...')
         queue.textChannel.send({embeds: [embed]})
     })

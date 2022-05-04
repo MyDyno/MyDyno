@@ -8,6 +8,7 @@ module.exports = {
 
         let clientCommands = new Array()
         let commandListArray = new Array();
+        
         const commandFolders = fs.readdirSync('./discord/commands/')
         commandFolders.forEach((folder) => {
             const commandFiles = fs.readdirSync('./discord/commands/' + folder).filter(file => file.endsWith('.js'))
