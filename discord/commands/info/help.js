@@ -20,7 +20,16 @@ module.exports = {
 
         let commandArray = commandListArray.reduce((a, b) => Object.assign(a, { [b.folder]: ( a[b.folder] || [] ).concat(b) }), {})
         Object.keys(commandArray).forEach((key) => {
-            if(key !== 'nsfw'){
+            if(key == 'nsfw'){
+                if(message.channel.nsfw){
+                    let commands = {
+                        name: key.toUpperCase() + ':',
+                        value: commandArray[key].map(obj => '`' + obj.command + '`').join(', ')
+                    }
+                    clientCommands.push(commands)
+                }
+            }
+            else{
                 let commands = {
                     name: key.toUpperCase() + ':',
                     value: commandArray[key].map(obj => '`' + obj.command + '`').join(', ')
