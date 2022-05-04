@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'boobs',
+    name: 'hmidriff',
 
     async execute(Discord, client, message, args, PREFIX){
 
@@ -14,9 +14,9 @@ module.exports = {
             return message.channel.send({embeds: [embed]})
         }
         
-        const image = await nsfw.boobs()
+        const image = await nsfw.hmidriff()
         const embed = new Discord.MessageEmbed()
-            .setTitle(`Boobs Image`)
+            .setTitle(`Hmifriff Image`)
             .setColor('RANDOM')
             .setImage(image);
         message.channel.send({embeds: [embed]});
