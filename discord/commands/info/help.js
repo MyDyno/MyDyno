@@ -28,6 +28,13 @@ module.exports = {
                     }
                     clientCommands.push(commands)
                 }
+                else{
+                    let commands = {
+                        name: key.toUpperCase() + ':',
+                        value: 'Only available in NSFW channel!'
+                    }
+                    clientCommands.push(commands)
+                }
             }
             else{
                 let commands = {
