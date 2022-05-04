@@ -56,6 +56,9 @@ async function main(){
 
     const { music } = require('./music')
     music(Discord, client)
+
+    const { error } = require('./error')
+    error(Discord, client)
     
     client.login(token)
     

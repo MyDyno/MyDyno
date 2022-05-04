@@ -42,12 +42,12 @@ app.post('/login', async (req, res) => {
     let matchPasswordLoginUser = loginUserArray.find((user) => user.email.toUpperCase() == req.body.email.toUpperCase() && user.password == req.body.password)
 
     if(!matchEmailLoginUser){
-        res.render('./account/login/login', {req: req, status: 'Email not found!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'}) 
+        res.render('./account/login/login', {req: req, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'}) 
     }
     else{
 
         if(!matchPasswordLoginUser){
-            res.render('./account/login/login', {req: req, status: 'Wrong password!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'})
+            res.render('./account/login/login', {req: req, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'})
         }
         else{
             saveLoginData(req, res)
@@ -62,12 +62,12 @@ app.post('/register', async (req, res) => {
     let matchUsernameRegisterUser = registerUserArray.find((user) => user.username.toUpperCase() == req.body.username.toUpperCase())
 
     if(matchEmailRegisterUser){
-        res.render('./account/register/register', {req: req, status: 'That email is already taken!, please try again with a unique email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+        res.render('./account/register/register', {req: req, status: 'The email or username is already taken!, please try again with a unique email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
     }
     else{
 
         if(matchUsernameRegisterUser){
-            res.render('./account/register/register', {req: req, status: 'That username is already taken!, please try again with a unique username!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+            res.render('./account/register/register', {req: req, status: 'The email or username is already taken!, please try again with a unique username!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
         }
         else{
             registerNext(req, res)
