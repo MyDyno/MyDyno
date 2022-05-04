@@ -4,19 +4,40 @@ module.exports = {
     alts: ['h'],
 
     execute(Discord, client, message, args, PREFIX){
+        const fs = require('fs');
 
-        let clientCommands = client.commands.map(cmd => `\`${cmd.name}\``).join(', ')
+        let clientCommands = new Array()
+        let commandListArray = new Array();
+        const commandFolders = fs.readdirSync('./discord/commands/')
+        commandFolders.forEach((folder) => {
+            const commandFiles = fs.readdirSync('./discord/commands/' + folder).filter(file => file.endsWith('.js'))
+            commandFiles.forEach((file) => {
+                const command = require('../../commands/' + folder + '/' + file)
+                commandListArray.push({folder: folder, file: file, command: command.name})
+            })
+        })
+
+        let commandArray = commandListArray.reduce((a, b) => Object.assign(a, { [b.folder]: ( a[b.folder] || [] ).concat(b) }), {})
+        Object.keys(commandArray).forEach((key) => {
+            let commands = {
+                name: key.toUpperCase() + ':',
+                value: commandArray[key].map(obj => '`' + obj.command + '`').join(', ')
+            }
+            clientCommands.push(commands)
+        })
+
         
         let helpEmbed = new Discord.MessageEmbed()
             .setTitle(client.user.username + ' | Help')
             .setDescription('Bot help command!')
             .setColor("GREEN")
             .setThumbnail(client.user.displayAvatarURL())
+            .addFields(clientCommands)
             .addFields(
-                {
-                    name: 'List of commands:',
-                    value: clientCommands
-                },
+                // {
+                //     name: 'List of commands:',
+                //     value: client.commands.map(cmd => `\`${cmd.name}\``).join(', ')
+                // },
                 {
                     name: 'Links:',
                     value:
@@ -30,67 +51,3 @@ module.exports = {
         message.channel.send({embeds: [helpEmbed]})
     }
 }
-
-// const embed = new Discord.MessageEmbed()
-//     .setColor('GREEN')
-//     .setThumbnail(client.user.displayAvatarURL())
-//     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-//     .addFields(
-//         {
-//             name: 'All users / info commands',
-//             value: '`help` `info` `ping` `invite`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Play games and earn money',
-//             value: '`rps` `quiz`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Make or delete your bank account',
-//             value: '`ecrt` `edel`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Check your balance or pay some',
-//             value: '`bal` `pay`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Deposite or withdraw money',
-//             value: '`dep` `with`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Earn some money',
-//             value: '`daily` `work`, `fish`, `hunt`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Shop items and check inventory',
-//             value: '`shop` `inv` `buy` `sell`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Fun AI and other commands',
-//             value: '`talk` `meme` `truth` `dare`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Moderation commands',
-//             value: '`kick` `ban` `slowmode` `purge`',
-//             inline: true,
-//         },
-//         {
-//             name: 'Settings and utility commands ',
-//             value: '`prefix` `serverinfo` `avatar` ',
-//             inline: true,
-//         },
-//         {
-//             name: 'Music commands!',
-//             value: '`mp3`' 
-//         }
-//     )
-//     .setFooter(client.user.username + ' developed by ' + client.config.botDeveloper)
-
-// message.channel.send({ embeds: [embed] })
