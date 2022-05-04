@@ -24,8 +24,5 @@ module.exports = {
         Pornsearch.search('pussy')
         .gifs()
         .then(gifs => message.channel.send(gifs));
-
-        Pornsearch.gifs(3)
-        .then(gifs => console.log(gifs.map(gif => gif.url)));
     }
 }
