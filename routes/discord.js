@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/invite', (req, res) => {
-    res.redirect('https://discord.com/api/oauth2/authorize?client_id=833607908104732672&permissions=972549751&scope=bot')
+    res.redirect(client.config.botInvite)
 })
 
 app.get('/support', (req, res) => {
