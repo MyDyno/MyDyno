@@ -1,7 +1,7 @@
 {
     "botDeveloper": "Raunak Raj#0060",
     "botDeveloperId": "554289787859632156",
-    "botInvite": "https://discord.com/api/oauth2/authorize?client_id=833607908104732672&permissions=8&scope=bot",
+    "botInvite": "https://discord.com/api/oauth2/authorize?client_id=833607908104732672&permissions=8&scope=bot%20applications.commands",
     "voteBot": "https://top.gg/bot/833607908104732672/vote",
     "supportServer": "https://discord.gg/Rgj6e8Tuq5",
 
