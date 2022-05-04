@@ -16,7 +16,7 @@ module.exports = {
 
         Searcher.videos().then(videos => message.channel.send(videos))
 
-        Pornsearch.videos()
+        Searcher.videos()
         .then(videos => message.channel.send(videos)
         .then(() => Pornsearch.gifs())
         .then(gifs => message.channel.send(gifs)));
@@ -24,5 +24,8 @@ module.exports = {
         Pornsearch.search('pussy')
         .gifs()
         .then(gifs => message.channel.send(gifs));
+
+        Pornsearch.gifs(3)
+        .then(gifs => console.log(gifs.map(gif => gif.url)));
     }
 }
