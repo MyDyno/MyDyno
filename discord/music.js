@@ -27,7 +27,7 @@ const main = (Discord, client) => {
         }
     )
 
-    const status = (queue) => `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``  
+    const status = (queue) => `Volume: \`${queue.volume}%\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'}\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``  
 
     client.distube.on('playSong', (queue, song) => {
         const embed = new Discord.MessageEmbed()
