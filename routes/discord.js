@@ -12,7 +12,7 @@ app.get('/invite', (req, res) => {
 })
 
 app.get('/support', (req, res) => {
-    res.redirect('https://discord.gg/Rgj6e8Tuq5')
+    res.redirect(client.config.supportServer)
 })
 
 module.exports = {app: app}
