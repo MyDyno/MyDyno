@@ -9,17 +9,14 @@ module.exports = (client, Discord) => {
 
             const command = require('../commands/' + folder + '/' + file)
     
-            if(!command.alts){
-                command.alts = []
-            }
             if(command.name){
                 client.commands.set(command.name, command)
             }
-            command.alts.forEach((alt) => {
-                if(alt){
+            if(command.alts){
+                command.alts.forEach((alt) => {
                     client.alts.set(alt, command)
-                }
-            })
+                })
+            }
         }
     }
 

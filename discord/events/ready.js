@@ -16,7 +16,7 @@ module.exports = {
         setStatus()
         setInterval(() => {
             setStatus()
-        }, 600000);
+        }, 10 * 60 * 1000);
         
     }
 }
