@@ -9,7 +9,7 @@ module.exports = async (client, Discord) => {
     const { REST } = require('@discordjs/rest')
     const { Routes } = require('discord-api-types/v9')
     const rest = new REST({version: '9'}).setToken(token)
-    const commands = [];
+    const commands = new Array();
     const fs = require('fs')
     
     const commandFiles = fs.readdirSync('./discord/slash_commands/').filter(file => file.endsWith('.js'))
@@ -23,10 +23,7 @@ module.exports = async (client, Discord) => {
     }
         
     try{
-        await rest.put(
-            Routes.applicationCommands(clientID),
-            { body: commands },
-        );
+        await rest.put(Routes.applicationCommands(clientID), {body: commands});
     }
     catch(error){
         console.error(error);
