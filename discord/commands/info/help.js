@@ -1,10 +1,11 @@
+const fs = require('fs');
+
 module.exports = {
     name: 'help',
 
     alts: ['h'],
 
     execute(Discord, client, message, args, PREFIX){
-        const fs = require('fs');
 
         let clientCommands = new Array()
         let commandListArray = new Array();
@@ -53,10 +54,6 @@ module.exports = {
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(clientCommands)
             .addFields(
-                // {
-                //     name: 'List of commands:',
-                //     value: client.commands.map(cmd => `\`${cmd.name}\``).join(', ')
-                // },
                 {
                     name: 'Links:',
                     value:

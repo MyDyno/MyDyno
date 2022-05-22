@@ -3,7 +3,11 @@ module.exports = {
 
     execute(Discord, client, message){
         
-        message.channel.send('API Latency is: `' + Math.round(client.ws.ping) + 'ms`')
+        const embed = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setDescription('API Latency is: `' + Math.round(client.ws.ping) + 'ms`')
+
+        message.channel.send({ embeds: [embed] })
         
     }
 }

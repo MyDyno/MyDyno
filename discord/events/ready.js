@@ -3,14 +3,14 @@ module.exports = {
 
     execute(ready, Discord, client){
 
-        let status = {
-            type: 'PLAYING', 
-            activity: 'in ' + client.guilds.cache.size + ' guilds!'
-        }
-
         console.log('Discord: Logged in as: ' + client.user.tag)
 
         function setStatus(){
+            let status = {
+                type: 'PLAYING', 
+                activity: 'in ' + client.guilds.cache.size + ' guilds!'
+            }
+            
             client.user.setActivity(status.activity, {type: status.type});
         }
         setStatus()

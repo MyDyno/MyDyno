@@ -25,11 +25,16 @@ async function main(){
         }
     );
     client.config = require('./config.json')
-    const fs = require('fs');
     let token = process.env.token || client.config.betaToken
+    client.login(token);
+    
+    const fs = require('fs');
+    client.wait = require('node:timers/promises').setTimeout;
+    
     client.commands = new Discord.Collection();
     client.alts = new Discord.Collection();
     client.events = new Discord.Collection();
+    client.slashCommands = new Discord.Collection();
 
     if(token == process.env.token){
         const { AutoPoster } = require('topgg-autoposter')
@@ -47,10 +52,16 @@ async function main(){
     const { music } = require('./music')
     music(Discord, client)
 
-    const { error } = require('./error')
-    error(Discord, client)
+    const { custom } = require('./custom')
+    custom(Discord, client)
+
+    process.on("unhandledRejection", e => {
+        console.log('an unhandledRejection occured:\n' + e)
+    });
     
-    client.login(token)
+    process.on("uncaughtException", e => {
+        console.log('an uncaughtException occured:\n' + e)
+    });
     
     function returnDiscordClient(){
         return client;
