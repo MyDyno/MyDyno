@@ -36,6 +36,9 @@ async function main(){
     client.events = new Discord.Collection();
     client.slashCommands = new Discord.Collection();
 
+    client.commandsHandler = true;
+    client.slashCommandsHandler = true;
+
     if(token == process.env.token){
         const { AutoPoster } = require('topgg-autoposter')
         const ap = AutoPoster(client.config.dbl_token, client)

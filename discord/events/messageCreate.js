@@ -46,6 +46,10 @@ module.exports = {
         let args = message.content.substring(PREFIX.length).split(' ')
         if(!message.content.startsWith(PREFIX)) return;
         
+        if(message.user.id !== client.config.botDeveloperId){
+            if(client.commandsHandler == false) return;
+        }
+
         let commandFolders = fs.readdirSync('./discord/commands/')
         for(const folder of commandFolders){
 

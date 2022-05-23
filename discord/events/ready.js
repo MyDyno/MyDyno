@@ -5,13 +5,15 @@ module.exports = {
         client.refreshGuildCountStatus = true;
         client.refreshUserCountStatus = false;
         client.statusType = 'PLAYING';
+        client.statusTypeText = 'Playing'
+        client.statusMessage = `in ${client.guilds.cache.size} guilds!`
 
         console.log('Discord: Logged in as: ' + client.user.tag)
 
         function setGuildCountStatus(){
             let status = {
                 type: client.statusType, 
-                activity: 'in ' + client.guilds.cache.size + ' guilds!'
+                activity: client.statusMessage
             }
             
             client.user.setActivity(status.activity, {type: status.type});
@@ -19,7 +21,7 @@ module.exports = {
         function setUserCountStatus(){
             let status = {
                 type: client.statusType, 
-                activity: 'with ' + client.users.cache.size + ' users!'
+                activity: client.statusMessage
             }
             
             client.user.setActivity(status.activity, {type: status.type});

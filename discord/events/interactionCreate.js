@@ -6,6 +6,10 @@ module.exports = {
     async execute(interaction, Discord, client){
         if (!interaction.isCommand()) return;
 
+        if(interaction.user.id !== client.config.botDeveloperId){
+            if(client.slashCommandsHandler == false) return;
+        }
+
         const commandFolders = fs.readdirSync('./discord/slash_commands/')
         for(const folder of commandFolders){
 

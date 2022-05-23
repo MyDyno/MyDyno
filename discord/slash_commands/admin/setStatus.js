@@ -51,33 +51,37 @@ module.exports = {
             }
 
             let typeText;
-            if(type == 'COMPETING'){typeText = 'Competing'}
-            else if(type == 'LISTENING'){typeText = 'Listening'}
+            if(type == 'COMPETING'){typeText = 'Competing in'}
+            else if(type == 'LISTENING'){typeText = 'Listening to'}
             else if(type == 'PLAYING'){typeText = 'Playing'}
             else if(type == 'WATCHING'){typeText = 'Watching'}
 
             if(defaultStatus){
-                let statusMessage
                 if(defaultStatus == 'guild_count'){
-                    statusMessage = `in ${client.guilds.cache.size} guilds!`
+                    client.statusMessage = `in ${client.guilds.cache.size} guilds!`
                     client.statusType = type
+                    client.statusTypeText = typeText
                     client.refreshGuildCountStatus = true;
                     client.refreshUserCountStatus = false;
                 }
                 else if(defaultStatus == 'user_count'){
-                    statusMessage = `with ${client.users.cache.size} users!`
+                    client.statusMessage = `with ${client.users.cache.size} users!`
                     client.statusType = type
+                    client.statusTypeText = typeText
                     client.refreshGuildCountStatus = false;
                     client.refreshUserCountStatus = true;
                 }
 
-                client.user.setActivity(statusMessage, {type: type})
+                client.user.setActivity(client.statusMessage, {type: type})
                 const embed = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setDescription('Status set: `' + typeText + ' ' + statusMessage + '`!')
+                    .setDescription('Status set: `' + typeText + ' ' + client.statusMessage + '`!')
                 await interaction.reply({embeds: [embed]})
             }
             else if(customStatus){
+                client.statusMessage = customStatus
+                client.statusType = type
+                client.statusTypeText = typeText
                 client.refreshGuildCountStatus = false;
                 client.refreshUserCountStatus = false;
 
