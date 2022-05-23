@@ -58,7 +58,7 @@ module.exports = {
 
             const embed = new Discord.MessageEmbed()
                 .setColor('RED')
-                .setDescription(client.emotes.error + ' | This command is limit to the application owner only!')
+                .setDescription(client.emotes.error + ' | This command is limited to the application owner only!')
 
             return message.channel.send({embeds: [embed]})
         }

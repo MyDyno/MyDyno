@@ -12,13 +12,18 @@ module.exports = async (client, Discord) => {
     const commands = new Array();
     const fs = require('fs')
     
-    const commandFiles = fs.readdirSync('./discord/slash_commands/').filter(file => file.endsWith('.js'))
-    for(const file of commandFiles){
-        const command = require('../slash_commands/' + file)
+    const commandFolders = fs.readdirSync('./discord/slash_commands/')
+    for(const folder of commandFolders){
 
-        if(command.data){
-            commands.push(command.data.toJSON())
-            client.slashCommands.set(command.data.toJSON().name, command)
+        const commandFiles = fs.readdirSync('./discord/slash_commands/' + folder).filter(file => file.endsWith('.js'))
+        for(const file of commandFiles){
+            
+            const command = require('../slash_commands/' + folder + '/' + file)
+    
+            if(command.data){
+                commands.push(command.data.toJSON())
+                client.slashCommands.set(command.data.toJSON().name, command)
+            }
         }
     }
         
