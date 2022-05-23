@@ -7,7 +7,7 @@ module.exports = {
 
     async execute(Discord, client, interaction){
         
-        await interaction.derefReply()
+        await interaction.deferReply()
         await client.wait(3000)
         await interaction.deleteReply()
         client.commands.get('help').execute(Discord, client, interaction)
