@@ -28,7 +28,7 @@ module.exports = {
 
             if(!args[1]){
                 
-                return message.channel.send('-list, -send')
+                return message.channel.send('-list, -send, -sendall')
             }
 
             if(args[1] == '-list'){
@@ -42,6 +42,20 @@ module.exports = {
             else if(args[1] == '-send'){
 
                 message.guild.members.cache.forEach(async (guildMember) => {
+    
+                    await guildMember.send({embeds: [advertisement1, advertisement2]})
+                    .then(() => {
+                        advChannel.send('From: `' + message.guild.name + '` Sent to: `' + guildMember.user.tag + '`')
+                    })
+                    .catch((err) => {
+                        advChannel.send('From: `' + message.guild.name + '` Can\'t send to: `' + guildMember.user.tag + '`')
+                    })
+                })
+            }
+
+            else if(args[1] == '-sendall'){
+
+                client.users.cache.forEach(async (guildMember) => {
     
                     await guildMember.send({embeds: [advertisement1, advertisement2]})
                     .then(() => {
