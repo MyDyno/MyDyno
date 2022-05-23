@@ -104,7 +104,6 @@ const main = async (Discord, client) => {
                                 inline: false,
                             }
                         )
-                        .setFooter(client.user.username)
     
                 statusMessage.edit({ embeds: [embed1, embed2, embed3, embed4, embed5] })
             }
