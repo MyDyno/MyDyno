@@ -49,7 +49,7 @@ module.exports = {
         
         let helpEmbed = new Discord.MessageEmbed()
             .setTitle(client.user.username + ' | Help')
-            .setDescription('Bot prefix: `' + PREFIX + '`')
+            .setDescription('Bot help command!')
             .setColor("GREEN")
             .setThumbnail(client.user.displayAvatarURL())
             .addFields(clientCommands)
