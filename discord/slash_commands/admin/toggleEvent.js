@@ -7,7 +7,7 @@ module.exports = {
         .addStringOption(option => 
             option
             .setName('event')
-            .setDescription('Choose status type!')
+            .setDescription('Choose event!')
             .setRequired(true)
             .addChoice('messageCreate', 'messageCreate')
             .addChoice('interactionCreate', 'interactionCreate')
@@ -15,7 +15,7 @@ module.exports = {
         .addStringOption(option => 
             option
             .setName('toggle')
-            .setDescription('Choose status text!')
+            .setDescription('Enable/Disable')
             .setRequired(true)
             .addChoice('Enable', 'enabled')
             .addChoice('Disable', 'disabled')
