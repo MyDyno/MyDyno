@@ -49,64 +49,64 @@ const main = async (Discord, client) => {
                 let seconds = Math.floor(totalSeconds % 60);
                 let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
 
-                let embed1 = new Discord.MessageEmbed()
-                        // .setAuthor('Bot Status', client.user.displayAvatarURL())
-                        .setTitle('Bot Status')
-                        .setDescription('__Status:__ ' + client.statusTypeText + ' ' + client.statusMessage + '\nㅤ')
-                        // .setThumbnail(client.user.displayAvatarURL())
-                
-                let embed2 = new Discord.MessageEmbed()
-                        .addFields(
-                            {
-                                name: 'App Owner',
-                                value: '<@' + client.config.botDeveloperId + '>'.toString(),
-                                inline: true,
-                            },
-                            {
-                                name: 'Prefix',
-                                value: '`' + PREFIX + '`',
-                                inline: true,
-                            },
-                        )
-
-                let embed3 = new Discord.MessageEmbed()
-                        .addFields(
-                            {
-                                name: 'Server Count',
-                                value: client.guilds.cache.size.toString(),
-                                inline: true,
-                            },
-                            {
-                                name: 'User Count',
-                                value: client.users.cache.size.toString(),
-                                inline: true,
-                            },
-                        )
-
-                let embed4 = new Discord.MessageEmbed()
-                        .addFields(
-                            {
-                                name: 'Event',
-                                value: 'message: `' + clientCommand + '`\n' + 'interaction: `' + clientSlashCommand + '`',
-                                inline: true,
-                            },
-                            {
-                                name: 'Refresh Status',
-                                value: 'Guild: `' + client.refreshGuildCountStatus.toString().toUpperCase() + '`\n' + 'User: `' + client.refreshUserCountStatus.toString().toUpperCase() + '`',
-                                inline: true,
-                            },
-                        )
-
-                let embed5 = new Discord.MessageEmbed()
-                        .addFields(
-                            {
-                                name: 'Uptime:',
-                                value: '`' + uptime + '`',
-                                inline: false,
-                            }
-                        )
+                let embed = new Discord.MessageEmbed()
+                    .setThumbnail(client.user.displayAvatarURL())
+                    .setTitle('Bot Status')
+                    .setDescription('__Status:__ ' + client.statusTypeText + ' ' + client.statusMessage + '\nㅤ')
+                    .addFields(
+                        {
+                            name: 'App Owner',
+                            value: '<@' + client.config.botDeveloperId + '>'.toString(),
+                            inline: true,
+                        },
+                        {
+                            name: 'ㅤ',
+                            value: 'ㅤ\nㅤ',
+                            inline: true,
+                        },
+                        {
+                            name: 'Bot Prefix',
+                            value: '`' + PREFIX + '`',
+                            inline: true,
+                        },
+                        {
+                            name: 'Server Count',
+                            value: client.guilds.cache.size.toString(),
+                            inline: true,
+                        },
+                        {
+                            name: 'ㅤ',
+                            value: 'ㅤ\nㅤ',
+                            inline: true,
+                        },
+                        {
+                            name: 'User Count',
+                            value: client.users.cache.size.toString(),
+                            inline: true,
+                        },
+                        {
+                            name: 'Client Events',
+                            value: 'message: `' + clientCommand + '`\n' + 'interaction: `' + clientSlashCommand + '`',
+                            inline: true,
+                        },
+                        {
+                            name: 'ㅤ',
+                            value: 'ㅤ\nㅤ\nㅤ',
+                            inline: true,
+                        },
+                        {
+                            name: 'Refresh Status',
+                            value: 'Guild: `' + client.refreshGuildCountStatus.toString().toUpperCase() + '`\n' + 'User: `' + client.refreshUserCountStatus.toString().toUpperCase() + '`',
+                            inline: true,
+                        },
+                        {
+                            name: 'Uptime:',
+                            value: '`' + uptime + '`',
+                            inline: false,
+                        }
+                    )
     
-                statusMessage.edit({ embeds: [embed1, embed2, embed3, embed4, embed5]})
+                statusMessage.edit({embeds: [embed]})
             }
             //embed edit with third field using invisible name, value 'ㅤ'
 
