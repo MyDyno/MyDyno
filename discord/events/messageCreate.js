@@ -45,15 +45,6 @@ module.exports = {
         
         let args = message.content.substring(PREFIX.length).split(' ')
         if(!message.content.startsWith(PREFIX)) return;
-        
-        if(message.author.id !== client.config.botDeveloperId){
-            if(client.commandsHandler == false){
-                const embed = new Discord.MessageEmbed()
-                        .setColor('RED')
-                        .setDescription('The commands are `disabled` by the application owner! Please join [support server](' + client.config.supportServer + ') for more info!')
-                return message.reply({embeds: [embed]})
-            }
-        }
 
         let commandFolders = fs.readdirSync('./discord/commands/')
         for(const folder of commandFolders){
@@ -64,11 +55,27 @@ module.exports = {
                 const command = require('../commands/' + folder + '/' + file)
 
                 if(args[0].toLowerCase() == command.name){
+                    if(message.author.id !== client.config.botDeveloperId){
+                        if(client.commandsHandler == false){
+                            const embed = new Discord.MessageEmbed()
+                                    .setColor('RED')
+                                    .setDescription('The commands are `disabled` by the application owner! Please join [support server](' + client.config.supportServer + ') for more info!')
+                            return message.reply({embeds: [embed]})
+                        }
+                    }
                     client.commands.get(command.name).execute(Discord, client, message, args, PREFIX)
                 }
                 if(command.alts){
                     command.alts.forEach((alt) => {
                         if(args[0].toLowerCase() == alt){
+                            if(message.author.id !== client.config.botDeveloperId){
+                                if(client.commandsHandler == false){
+                                    const embed = new Discord.MessageEmbed()
+                                            .setColor('RED')
+                                            .setDescription('The commands are `disabled` by the application owner! Please join [support server](' + client.config.supportServer + ') for more info!')
+                                    return message.reply({embeds: [embed]})
+                                }
+                            }
                             client.alts.get(alt).execute(Discord, client, message, args, PREFIX)
                         }
                     })
