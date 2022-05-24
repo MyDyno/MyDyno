@@ -13,7 +13,7 @@ module.exports = {
         function setGuildCountStatus(){
             let status = {
                 type: client.statusType, 
-                activity: client.statusMessage
+                activity: `in ${client.guilds.cache.size} guilds!`
             }
             
             client.user.setActivity(status.activity, {type: status.type});
@@ -21,7 +21,7 @@ module.exports = {
         function setUserCountStatus(){
             let status = {
                 type: client.statusType, 
-                activity: client.statusMessage
+                activity: `with ${client.users.cache.size} users!`
             }
             
             client.user.setActivity(status.activity, {type: status.type});

@@ -7,7 +7,12 @@ module.exports = {
         if (!interaction.isCommand()) return;
 
         if(interaction.user.id !== client.config.botDeveloperId){
-            if(client.slashCommandsHandler == false) return;
+            if(client.slashCommandsHandler == false){
+                const embed = new Discord.MessageEmbed()
+                        .setColor('RED')
+                        .setDescription('The (/) commands are `disabled` by the application owner! Please join [support server](' + client.config.supportServer + ') for more info!')
+                return await interaction.reply({embeds: [embed]})
+            }
         }
 
         const commandFolders = fs.readdirSync('./discord/slash_commands/')

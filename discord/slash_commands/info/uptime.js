@@ -20,6 +20,6 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor('BLUE')
             .setDescription(uptime)
-        await interaction.reply({embeds: [embed], ephemeral: true})
+        await interaction.reply({embeds: [embed]})
     }
 }

@@ -46,8 +46,13 @@ module.exports = {
         let args = message.content.substring(PREFIX.length).split(' ')
         if(!message.content.startsWith(PREFIX)) return;
         
-        if(message.user.id !== client.config.botDeveloperId){
-            if(client.commandsHandler == false) return;
+        if(message.author.id !== client.config.botDeveloperId){
+            if(client.commandsHandler == false){
+                const embed = new Discord.MessageEmbed()
+                        .setColor('RED')
+                        .setDescription('The commands are `disabled` by the application owner! Please join [support server](' + client.config.supportServer + ') for more info!')
+                return message.reply({embeds: [embed]})
+            }
         }
 
         let commandFolders = fs.readdirSync('./discord/commands/')

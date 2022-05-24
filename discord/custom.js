@@ -21,23 +21,24 @@ const main = async (Discord, client) => {
             statusMessageId = '978310857270382602'
             PREFIX = client.config.betaPrefix
         }
-        if(client.commandsHandler == true){
-            clientCommand = 'enabled'
-        }
-        else if(client.commandsHandler == false){
-            clientCommand = 'disabled'
-        }
-        if(client.slashCommandsHandler == true){
-            clientSlashCommand = 'enabled'
-        }
-        else if(client.slashCommandsHandler == false){
-            clientSlashCommand = 'disabled'
-        }
+
         let statusChannel = client.channels.cache.get('839039008679788555')
-        
         statusChannel.messages.fetch(statusMessageId).then((statusMessage) => {
 
             const setStatus = (statusMessage) => {
+
+                if(client.commandsHandler == true){
+                    clientCommand = 'enabled'
+                }
+                else if(client.commandsHandler == false){
+                    clientCommand = 'disabled'
+                }
+                if(client.slashCommandsHandler == true){
+                    clientSlashCommand = 'enabled'
+                }
+                else if(client.slashCommandsHandler == false){
+                    clientSlashCommand = 'disabled'
+                }
 
                 let totalSeconds = (client.uptime / 1000);
                 let days = Math.floor(totalSeconds / 86400);
@@ -105,8 +106,10 @@ const main = async (Discord, client) => {
                             }
                         )
     
-                statusMessage.edit({ embeds: [embed1, embed2, embed3, embed4, embed5] })
+                statusMessage.edit({ embeds: [embed1, embed2, embed3, embed4, embed5]})
             }
+            //embed edit with third field using invisible name, value 'ㅤ'
+
             setStatus(statusMessage)
             setInterval(() => {
                 setStatus(statusMessage)
