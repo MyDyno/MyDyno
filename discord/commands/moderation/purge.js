@@ -1,7 +1,18 @@
 module.exports = {
     name: 'purge',
+    permissions: ['MANAGE_MESSAGES'],
 
     execute(Discord, client, message, args, PREFIX){
+
+        if(!message.member.permissions.has('MANAGE_MESSAGES')){
+
+            const noPermsEmbed = new Discord.MessageEmbed()
+                .setColor('RED')
+                .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                .setDescription('You dont have permission `MANAGE_MESSAGES` to purge!')
+
+            return message.channel.send({ embeds: [noPermsEmbed] })
+        }
         
         if(!args[1]){
 
@@ -35,7 +46,7 @@ module.exports = {
             })
         })
         .catch((err) => {
-            message.channel.send('There was a problem! Couldn\'t delete!')
+            message.channel.send('There was a problem! Couldn\'t delete!\nNote: You cannot delete messages older than 14 days!')
         })
     }
 }

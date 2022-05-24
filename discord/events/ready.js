@@ -2,11 +2,9 @@ module.exports = {
     name: 'ready',
 
     execute(ready, Discord, client){
+        client.statusType = 'PLAYING';
         client.refreshGuildCountStatus = true;
         client.refreshUserCountStatus = false;
-        client.statusType = 'PLAYING';
-        client.statusTypeText = 'Playing'
-        client.statusMessage = `in ${client.guilds.cache.size} guilds!`
 
         console.log('Discord: Logged in as: ' + client.user.tag)
 

@@ -1,6 +1,7 @@
 module.exports = {
     name: 'slowmode',
     alts: ['slowmo'],
+    permissions: ['MANAGE_CHANNELS'],
 
     execute(Discord, client, message, args, PREFIX){
         
@@ -10,16 +11,6 @@ module.exports = {
                 .setColor('RED')
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('You dont have permission `MANAGE_CHANNELS` to manage slowmode!')
-
-            return message.channel.send({ embeds: [noPermissionEmbed] })
-        }
-
-        if(!message.guild.me.permissions.has('MANAGE_CHANNELS')){
-
-            const noPermissionEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('I dont have permission `MANAGE_CHANNELS` to manage slowmode!')
 
             return message.channel.send({ embeds: [noPermissionEmbed] })
         }

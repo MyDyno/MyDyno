@@ -6,26 +6,8 @@ const schema = new Schema({
         type: String,
         require: true,
     },
-    dailyCooldown: {
-        type: Number,
-    },
-    workCooldown: {
-        type: Number,
-    },
-    fishCooldown:{
-        type: Number,
-    },
-    huntCooldown: {
-        type: Number,
-    },
-    digCooldown:{
-        type: Number,
-    },
-    quizCooldown:{
-        type: Number,
-    },
-    rpsCooldown:{
-        type: Number,
+    cooldowns: {
+        type: Array
     },
 })
 

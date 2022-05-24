@@ -27,6 +27,7 @@ module.exports = {
 
         let createdCooldown = await cooldownModel.create({
             userId: message.author.id,
+            cooldowns: []
         })
 
         createdModel.save()

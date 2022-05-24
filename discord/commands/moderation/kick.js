@@ -1,5 +1,6 @@
 module.exports = {
     name: 'kick',
+    permissions: ['KICK_MEMBERS'],
 
     execute(Discord, client, message, args, PREFIX){
 
@@ -11,15 +12,6 @@ module.exports = {
                 .setColor('RED')
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('You dont have permission `KICK_MEMBERS` to kick!')
-
-            return message.channel.send({ embeds: [noPermsEmbed] })
-        }
-        if(!message.guild.me.permissions.has('KICK_MEMBERS')){
-
-            const noPermsEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('I dont have permission `KICK_MEMBERS` to kick!')
 
             return message.channel.send({ embeds: [noPermsEmbed] })
         }

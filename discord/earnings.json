@@ -1,0 +1,23 @@
+{
+    "dailyHighRange": 5000,
+    "dailyLowRange": 1000,
+
+    "workHighRange": 1000,
+    "workLowRange": 500,
+
+    "fishHighRange": 500,
+    "fishLowRange": 100,
+
+    "huntHighRange": 500,
+    "huntLowRange": 100,
+
+    "digHighRange": 500,
+    "digLowRange": 100,
+
+    "quizHighRange": 200,
+    "quizLowRange": 100,
+
+    "rpsHighRange": 200,
+    "rpsLowRange": 100
+    
+}

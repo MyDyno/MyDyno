@@ -1,11 +1,42 @@
 {
     "shop": [
         {
+            "name": "Gold",
+            "buyName": "gold",
+            "description": "Used for business!",
+            "emoji": "🥇",
+            "price": 200000,
+            "sellingPrice": 189000
+        },
+        {
+            "name": "Silver",
+            "buyName": "silver",
+            "description": "Used for business!",
+            "emoji": "🥈",
+            "price": 100000,
+            "sellingPrice": 94500
+        },
+        {
+            "name": "Bronze",
+            "buyName": "bronze",
+            "description": "Used for business!",
+            "emoji": "🥉",
+            "price": 50000,
+            "sellingPrice": 47250
+        },
+        {
+            "name": "Coins",
+            "buyName": "coins",
+            "description": "Store solid money!",
+            "emoji": "🪙",
+            "price": 1000,
+            "sellingPrice": 1000
+        },
+        {
             "name": "Fishing Pole",
             "buyName": "fishingpole",
             "description": "Use it to fish!",
-            "emoji": "🎣 ",
-            "indexValue": 1,
+            "emoji": "🎣",
             "price": 10000,
             "sellingPrice": 1000
         },
@@ -13,8 +44,7 @@
             "name": "Hunting Rifle",
             "buyName": "huntingrifle",
             "description": "Use it to hunt!",
-            "emoji": "🔫 ",
-            "indexValue": 2,
+            "emoji": "🔫",
             "price": 10000,
             "sellingPrice": 1000
         },
@@ -22,19 +52,9 @@
             "name": "Shovel",
             "buyName": "shovel",
             "description": "Use it to dig!",
-            "emoji": "⛏️ ",
-            "indexValue": 3,
+            "emoji": "⛏️",
             "price": 10000,
             "sellingPrice": 1000
-        },
-        {
-            "name": "Trash",
-            "buyName": "trash",
-            "description": "It does nothing!",
-            "emoji": "🥫 ",
-            "indexValue": 4,
-            "price": 50,
-            "sellingPrice": 50
         }
     ]
 }

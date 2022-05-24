@@ -3,20 +3,11 @@ const shopConfig = require('../../shop.json')
 
 module.exports = {
     name: 'buy',
+    requireEconomyAccount: true,
 
     async execute(Discord, client, message, args, PREFIX){
         
         let myModel = await model.findOne({userId: message.author.id})
-
-        if(!myModel){
-
-            const noEconomyAccountEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('You dont have an account!, Use `ecrt` command to create one!')
-
-            return message.channel.send({embeds: [noEconomyAccountEmbed]})
-        }
 
         if(!args.slice(1).join(' ')){
 
@@ -32,7 +23,7 @@ module.exports = {
 
         if(buyItem){
 
-            let itemInInventory = myModel.inventory.find(i => i.indexValue == buyItem.indexValue)
+            let itemInInventory = myModel.inventory.find(i => i.buyName == buyItem.buyName)
             if(itemInInventory){
 
                 const alreadyBought = new Discord.MessageEmbed()
@@ -65,7 +56,7 @@ module.exports = {
                             name: buyItem.name,
                             buyName: buyItem.buyName,
                             description: buyItem.description,
-                            indexValue: buyItem.indexValue,
+                            emoji: buyItem.emoji,
                             price: buyItem.price,
                             sellingPrice: buyItem.sellingPrice
                         }

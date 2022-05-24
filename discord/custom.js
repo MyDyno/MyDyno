@@ -14,15 +14,15 @@ const main = async (Discord, client) => {
         let clientCommand;
         let clientSlashCommand;
         if(token == process.env.token){
-            statusMessageId = '978310844607762442'
+            statusMessageId = client.config.mainStatusMessageId
             PREFIX = client.config.mainPrefix
         }
         else if(token == client.config.betaToken){
-            statusMessageId = '978310857270382602'
+            statusMessageId = client.config.betaStatusMessageId
             PREFIX = client.config.betaPrefix
         }
 
-        let statusChannel = client.channels.cache.get('839039008679788555')
+        let statusChannel = client.channels.cache.get(client.config.statusChannelId)
         statusChannel.messages.fetch(statusMessageId).then((statusMessage) => {
 
             const setStatus = (statusMessage) => {
@@ -47,68 +47,33 @@ const main = async (Discord, client) => {
                 totalSeconds %= 3600;
                 let minutes = Math.floor(totalSeconds / 60);
                 let seconds = Math.floor(totalSeconds % 60);
-                let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+                let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;   
+
+                let statusTypeText;
+                if(client.user.presence.activities[0].type == 'COMPETING'){statusTypeText = 'Competing in'}
+                else if(client.user.presence.activities[0].type == 'LISTENING'){statusTypeText = 'Listening to'}
+                else if(client.user.presence.activities[0].type == 'PLAYING'){statusTypeText = 'Playing'}
+                else if(client.user.presence.activities[0].type == 'WATCHING'){statusTypeText = 'Watching'}
 
                 let embed = new Discord.MessageEmbed()
                     .setThumbnail(client.user.displayAvatarURL())
                     .setTitle('Bot Status')
-                    .setDescription('__Status:__ ' + client.statusTypeText + ' ' + client.statusMessage + '\nㅤ')
+                    .setDescription('__Status:__ ' + statusTypeText + ' ' + client.user.presence.activities[0].name + '\nㅤ')
                     .addFields(
-                        {
-                            name: 'App Owner',
-                            value: '<@' + client.config.botDeveloperId + '>'.toString(),
-                            inline: true,
-                        },
-                        {
-                            name: 'ㅤ',
-                            value: 'ㅤ\nㅤ',
-                            inline: true,
-                        },
-                        {
-                            name: 'Bot Prefix',
-                            value: '`' + PREFIX + '`',
-                            inline: true,
-                        },
-                        {
-                            name: 'Server Count',
-                            value: client.guilds.cache.size.toString(),
-                            inline: true,
-                        },
-                        {
-                            name: 'ㅤ',
-                            value: 'ㅤ\nㅤ',
-                            inline: true,
-                        },
-                        {
-                            name: 'User Count',
-                            value: client.users.cache.size.toString(),
-                            inline: true,
-                        },
-                        {
-                            name: 'Client Events',
-                            value: 'message: `' + clientCommand + '`\n' + 'interaction: `' + clientSlashCommand + '`',
-                            inline: true,
-                        },
-                        {
-                            name: 'ㅤ',
-                            value: 'ㅤ\nㅤ\nㅤ',
-                            inline: true,
-                        },
-                        {
-                            name: 'Refresh Status',
-                            value: 'Guild: `' + client.refreshGuildCountStatus.toString().toUpperCase() + '`\n' + 'User: `' + client.refreshUserCountStatus.toString().toUpperCase() + '`',
-                            inline: true,
-                        },
-                        {
-                            name: 'Uptime:',
-                            value: '`' + uptime + '`',
-                            inline: false,
-                        }
+                        {name: 'App Owner', value: '<@' + client.config.botDeveloperId + '>'.toString(), inline: true},
+                        {name: 'ㅤ', value: 'ㅤ\nㅤ', inline: true},
+                        {name: 'Bot Prefix', value: '`' + PREFIX + '`', inline: true},
+                        {name: 'Server Count', value: client.guilds.cache.size.toString(), inline: true},
+                        {name: 'ㅤ', value: 'ㅤ\nㅤ', inline: true},
+                        {name: 'User Count', value: client.users.cache.size.toString(), inline: true},
+                        {name: 'Client Events', value: 'message: `' + clientCommand + '`\n' + 'interaction: `' + clientSlashCommand + '`', inline: true},
+                        {name: 'ㅤ', value: 'ㅤ\nㅤ\nㅤ', inline: true},
+                        {name: 'Refresh Status', value: 'Guild: `' + client.refreshGuildCountStatus.toString().toUpperCase() + '`\n' + 'User: `' + client.refreshUserCountStatus.toString().toUpperCase() + '`', inline: true},
+                        {name: 'Uptime:', value: '`' + uptime + '`', inline: false}
                     )
     
                 statusMessage.edit({embeds: [embed]})
             }
-            //embed edit with third field using invisible name, value 'ㅤ'
 
             setStatus(statusMessage)
             setInterval(() => {

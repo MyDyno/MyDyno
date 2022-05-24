@@ -1,5 +1,6 @@
 module.exports = {
     name: 'ban',
+    permissions: ['BAN_MEMBERS'],
 
     execute(Discord, client, message, args, PREFIX){
 
@@ -11,15 +12,6 @@ module.exports = {
                 .setColor('RED')
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('You dont have permission `BAN_MEMBERS` to ban!')
-
-            return message.channel.send({ embeds: [noPermsEmbed] })
-        }
-        if(!message.guild.me.permissions.has('BAN_MEMBERS')){
-
-            const noPermsEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('I dont have permission `BAN_MEMBERS` to ban!')
 
             return message.channel.send({ embeds: [noPermsEmbed] })
         }

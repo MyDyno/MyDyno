@@ -3,21 +3,12 @@ const cooldownModel = require('../../../models/discord/cooldown')
 
 module.exports = {
     name: 'edel',
+    requireEconomyAccount: true,
 
     async execute(Discord, client, message){
         
         let myModel = await model.findOne({userId: message.author.id})
         let cooldown = await cooldownModel.findOne({userId: message.author.id})
-
-        if(!myModel){
-
-            const noEconomyAccountEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('You dont have an account!, Use `ecrt` command to create one!')
-
-            return message.channel.send({embeds: [noEconomyAccountEmbed]})
-        }
 
         const dangerEdel = new Discord.MessageEmbed()
             .setColor('RED')

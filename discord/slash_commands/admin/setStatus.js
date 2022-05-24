@@ -50,45 +50,42 @@ module.exports = {
                 return await interaction.reply({embeds: [embed], ephemeral: true})
             }
 
-            let typeText;
-            if(type == 'COMPETING'){typeText = 'Competing in'}
-            else if(type == 'LISTENING'){typeText = 'Listening to'}
-            else if(type == 'PLAYING'){typeText = 'Playing'}
-            else if(type == 'WATCHING'){typeText = 'Watching'}
+            let statusTypeText;
+            if(type == 'COMPETING'){statusTypeText = 'Competing in'}
+            else if(type == 'LISTENING'){statusTypeText = 'Listening to'}
+            else if(type == 'PLAYING'){statusTypeText = 'Playing'}
+            else if(type == 'WATCHING'){statusTypeText = 'Watching'}
 
             if(defaultStatus){
+                let statusMessage;
+
                 if(defaultStatus == 'guild_count'){
-                    client.statusMessage = `in ${client.guilds.cache.size} guilds!`
+                    statusMessage = `in ${client.guilds.cache.size} guilds!`
                     client.statusType = type
-                    client.statusTypeText = typeText
                     client.refreshGuildCountStatus = true;
                     client.refreshUserCountStatus = false;
                 }
                 else if(defaultStatus == 'user_count'){
-                    client.statusMessage = `with ${client.users.cache.size} users!`
+                    statusMessage = `with ${client.users.cache.size} users!`
                     client.statusType = type
-                    client.statusTypeText = typeText
                     client.refreshGuildCountStatus = false;
                     client.refreshUserCountStatus = true;
                 }
 
-                client.user.setActivity(client.statusMessage, {type: type})
+                client.user.setActivity(statusMessage, {type: type})
                 const embed = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setDescription('Status set: `' + typeText + ' ' + client.statusMessage + '`!')
+                    .setDescription('Status set: `' + statusTypeText + ' ' + statusMessage + '`!')
                 await interaction.reply({embeds: [embed]})
             }
             else if(customStatus){
-                client.statusMessage = customStatus
-                client.statusType = type
-                client.statusTypeText = typeText
                 client.refreshGuildCountStatus = false;
                 client.refreshUserCountStatus = false;
 
                 client.user.setActivity(customStatus, {type: type})
                 const embed = new Discord.MessageEmbed()
                     .setColor('GREEN')
-                    .setDescription('Status set: `' + typeText + ' ' + customStatus + '`!')
+                    .setDescription('Status set: `' + statusTypeText + ' ' + customStatus + '`!')
                 await interaction.reply({embeds: [embed]})
             }
         }

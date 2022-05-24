@@ -24,6 +24,7 @@ async function main(){
             partials: ["CHANNEL"]
         }
     );
+
     client.config = require('./config.json')
     let token = process.env.token || client.config.betaToken
     client.login(token);

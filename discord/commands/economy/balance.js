@@ -2,22 +2,12 @@ const model = require('../../../models/discord/economy')
 
 module.exports = {
     name: 'bal',
-
+    requireEconomyAccount: true,
     alts: ['balance'],
 
     async execute(Discord, client, message){
         
         let myModel = await model.findOne({userId: message.author.id})
-     
-        if(!myModel){
-
-            const noEconomyAccountEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('You dont have an account!, Use `ecrt` command to create one!')
-
-            return message.channel.send({embeds: [noEconomyAccountEmbed]})
-        }
 
         let mentionUser = message.mentions.users.first() 
         if(!mentionUser){

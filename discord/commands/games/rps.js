@@ -1,192 +1,121 @@
 const model = require('../../../models/discord/economy')
-const cooldownModel = require('../../../models/discord/cooldown')
+const earnings = require('../../earnings.json')
 
 module.exports = {
     name: 'rps',
-
+    cooldown: 20 * 1000,
+    requireEconomyAccount: true,
     alts: ['rockpaperscissor'],
 
     async execute(Discord, client, message){
         
-        let myModel = await model.findOne({userId: message.author.id})
-        let cooldown = await cooldownModel.findOne({userId: message.author.id})
-        let todayDate = new Date().getTime()
-        let storeDate = Number(new Date().getTime()) + Number(client.config.rpsCooldown)
-        let randomMoney = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
-     
-        if(!myModel){
+        let randomMoney = Math.floor(Math.random() * (earnings.rpsHighRange - earnings.rpsLowRange + 1)) + earnings.rpsLowRange;
 
-            const noEconomyAccountEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('You dont have an account!, Use `ecrt` command to create one!')
+        const rps_embed = new Discord.MessageEmbed()
+            .setTitle('Rock, Paper, Scissor')
+            .setColor('BLUE')
+            .setDescription('React to play the game!')
+            .setTimestamp()
+            .setFooter(client.user.username);
 
-            return message.channel.send({embeds: [noEconomyAccountEmbed]})
-        }
+        message.channel.send({embeds: [rps_embed]})
+        .then((r_message) => {
 
-        if(cooldown.rpsCooldown){
+            r_message.react('🧱').then(r_message.react('✂').then(r_message.react('📰')));
 
-            if(Number(todayDate) >= Number(cooldown.rpsCooldown)){
-
-                updateCooldown()
-                .then(() => {
-                    rpsCommand()
-                })
-
+            const filter = (reaction, user) => {
+                return ['🧱', '✂', '📰'].includes(reaction.emoji.name) && user.id === message.author.id;
             }
-            else{
-                onCooldown()
-            }
-        }
-        else{
 
-            updateCooldown()
-            .then(() => {
-                rpsCommand()
-            })
-        }
+            const bot_choice = ['🧱', '✂', '📰']
+            const random_bot_choice = bot_choice[Math.floor(Math.random() * bot_choice.length)]
 
-        async function updateCooldown(){
+            r_message.awaitReactions({filter, max: 1, time: 60000, error: ["time"] })
+            .then(async (collected) => {
+                const reaction = collected.first()
 
-            await cooldownModel.findOneAndUpdate(
-                {userId: message.author.id},
-                {
-                    rpsCooldown: storeDate
-                }
-            )
+                if ((random_bot_choice === "✂" && reaction.emoji.name === "🧱") || (random_bot_choice === "🧱" && reaction.emoji.name === "📰") || (random_bot_choice === "📰" && reaction.emoji.name === "✂")){
 
-        }
-
-        async function rpsCommand(){
-
-            const rps_embed = new Discord.MessageEmbed()
-                .setTitle('Rock, Paper, Scissor')
-                .setColor('BLUE')
-                .setDescription('React to play the game!')
-                .setTimestamp()
-                .setFooter(client.user.username);
-    
-            message.channel.send({embeds: [rps_embed]})
-            .then((r_message) => {
-    
-                r_message.react('🧱').then(r_message.react('✂').then(r_message.react('📰')));
-    
-                const filter = (reaction, user) => {
-                    return ['🧱', '✂', '📰'].includes(reaction.emoji.name) && user.id === message.author.id;
-                }
-    
-                const bot_choice = ['🧱', '✂', '📰']
-                const random_bot_choice = bot_choice[Math.floor(Math.random() * bot_choice.length)]
-    
-                r_message.awaitReactions({filter, max: 1, time: 60000, error: ["time"] })
-                .then(async (collected) => {
-                    const reaction = collected.first()
-    
-                    if ((random_bot_choice === "✂" && reaction.emoji.name === "🧱") || (random_bot_choice === "🧱" && reaction.emoji.name === "📰") || (random_bot_choice === "📰" && reaction.emoji.name === "✂")){
-    
-                        model.findOneAndUpdate(
-                            {userId: message.author.id},
-                            {
-                                $inc:{
-                                    cash: randomMoney
-                                }
+                    model.findOneAndUpdate(
+                        {userId: message.author.id},
+                        {
+                            $inc:{
+                                cash: randomMoney
                             }
-                        )
-                        .then(() => {
-    
-                            const rps_won_embed = new Discord.MessageEmbed()
-                                .setColor('GREEN')
-                                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                .setDescription(
-                                    '✅ Yey you won `' + client.config.currencyIcon + randomMoney + '`' + 
-                                    '\n\n ' + 
-                                    'Choices:' + 
-                                    '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
-                                )
-                                .setTimestamp()
-                                .setFooter(client.user.username);
-    
-                            r_message.edit({embeds: [rps_won_embed]})
-                            .then(() => {
-                                r_message.reactions.removeAll();
-                            });
-                        })
-                    }
-                    else if (random_bot_choice === reaction.emoji.name){
-    
-                        const rps_tie_embed = new Discord.MessageEmbed()
-                            .setColor('BLUE')
+                        }
+                    )
+                    .then(() => {
+
+                        const rps_won_embed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
                             .setDescription(
-                                '🚫 Its a tie!.' + 
+                                '✅ Yey you won `' + client.config.currencyIcon + randomMoney + '`' + 
                                 '\n\n ' + 
                                 'Choices:' + 
                                 '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
                             )
                             .setTimestamp()
                             .setFooter(client.user.username);
-                    
-                        r_message.edit({embeds: [rps_tie_embed]})
-                        .then(() => {
-                            r_message.reactions.removeAll();
-                        })
-                    }
-                    else{
-    
-                        const rps_loose_embed = new Discord.MessageEmbed()
-                            .setColor('RED')
-                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                            .setDescription(
-                                '❌ Your lost it!.' + 
-                                '\n\n ' + 'Choices:' + 
-                                '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
-                            )
-                            .setTimestamp()
-                            .setFooter(client.user.username);
-                    
-                        r_message.edit({embeds: [rps_loose_embed]})
+
+                        r_message.edit({embeds: [rps_won_embed]})
                         .then(() => {
                             r_message.reactions.removeAll();
                         });
-                    }
-                })
-                .catch(collected => {
-                    
-                    const no_response = new Discord.MessageEmbed()
-                        .setColor('RED')
+                    })
+                }
+                else if (random_bot_choice === reaction.emoji.name){
+
+                    const rps_tie_embed = new Discord.MessageEmbed()
+                        .setColor('BLUE')
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                        .setDescription('❌ Game has been cancelled since you did not reposnd in time!')
+                        .setDescription(
+                            '🚫 Its a tie!.' + 
+                            '\n\n ' + 
+                            'Choices:' + 
+                            '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
+                        )
                         .setTimestamp()
                         .setFooter(client.user.username);
-    
-                    r_message.edit({embeds: [no_response]})
+                
+                    r_message.edit({embeds: [rps_tie_embed]})
+                    .then(() => {
+                        r_message.reactions.removeAll();
+                    })
+                }
+                else{
+
+                    const rps_loose_embed = new Discord.MessageEmbed()
+                        .setColor('RED')
+                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                        .setDescription(
+                            '❌ Your lost it!.' + 
+                            '\n\n ' + 'Choices:' + 
+                            '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
+                        )
+                        .setTimestamp()
+                        .setFooter(client.user.username);
+                
+                    r_message.edit({embeds: [rps_loose_embed]})
                     .then(() => {
                         r_message.reactions.removeAll();
                     });
-                })
+                }
             })
-        }
+            .catch(collected => {
+                
+                const no_response = new Discord.MessageEmbed()
+                    .setColor('RED')
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                    .setDescription('❌ Game has been cancelled since you did not reposnd in time!')
+                    .setTimestamp()
+                    .setFooter(client.user.username);
 
-        function onCooldown(){
-
-            let rpsRemainingTime = Number(cooldown.rpsCooldown) - Number(todayDate)
-            let totalSeconds = (rpsRemainingTime / 1000);
-            let days = Math.floor(totalSeconds / 86400);
-            totalSeconds %= 86400;
-            let hours = Math.floor(totalSeconds / 3600);
-            totalSeconds %= 3600;
-            let minutes = Math.floor(totalSeconds / 60);
-            let seconds = Math.floor(totalSeconds % 60);                
-
-            const rpsCooldownEmbed = new Discord.MessageEmbed()
-                .setColor('RED')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('🕕 You are in cooldown for: `' + days + ' days,` `' + hours + ' hours`, `' + minutes + ' minutes`, `' + seconds + ' seconds!`')
-                .setTimestamp()
-                .setFooter(client.user.username)
-
-            message.channel.send({embeds: [rpsCooldownEmbed]})
-        }
-
+                r_message.edit({embeds: [no_response]})
+                .then(() => {
+                    r_message.reactions.removeAll();
+                });
+            })
+        })
     }
 }
