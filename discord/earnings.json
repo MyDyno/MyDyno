@@ -2,6 +2,9 @@
     "dailyHighRange": 5000,
     "dailyLowRange": 1000,
 
+    "weeklyHighRange": 10000,
+    "weeklyLowRange": 5000,
+
     "workHighRange": 1000,
     "workLowRange": 500,
 
@@ -19,5 +22,4 @@
 
     "rpsHighRange": 200,
     "rpsLowRange": 100
-    
 }

@@ -4,7 +4,7 @@ const earnings = require('../../earnings.json')
 module.exports = {
     name: 'daily',
     requireEconomyAccount: true,
-    cooldown: 12 * 60 * 60 * 1000,
+    cooldown: 24 * 60 * 60 * 1000,
 
     async execute(Discord, client, message){
 
@@ -20,14 +20,14 @@ module.exports = {
         )
         .then(() => {
 
-            const dailyEarnedEmbed = new Discord.MessageEmbed()
+            const EarnedEmbed = new Discord.MessageEmbed()
                 .setColor('GREEN')
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('✅ You recieved your daily `' + client.config.currencyIcon + randomMoney + '`')
                 .setTimestamp()
                 .setFooter(client.user.username);
 
-            message.channel.send({embeds: [dailyEarnedEmbed]})
+            message.channel.send({embeds: [EarnedEmbed]})
         })           
     }
 }
