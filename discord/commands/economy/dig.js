@@ -3,8 +3,8 @@ const earnings = require('../../earnings.json')
 
 module.exports = {
     name: 'dig',
-    cooldown: 60 * 60 * 1000,
     requireEconomyAccount: true,
+    cooldown: 60 * 60 * 1000,
 
     async execute(Discord, client, message){
         

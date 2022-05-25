@@ -4,8 +4,8 @@ const earnings = require('../../earnings.json')
 
 module.exports = {
     name: 'quiz',
-    cooldown: 20 * 1000,
     requireEconomyAccount: true,
+    cooldown: 20 * 1000,
 
     async execute(Discord, client, message, args, PREFIX){
         

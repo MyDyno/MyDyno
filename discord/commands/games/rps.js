@@ -3,9 +3,9 @@ const earnings = require('../../earnings.json')
 
 module.exports = {
     name: 'rps',
-    cooldown: 20 * 1000,
-    requireEconomyAccount: true,
     alts: ['rockpaperscissor'],
+    requireEconomyAccount: true,
+    cooldown: 20 * 1000,
 
     async execute(Discord, client, message){
         

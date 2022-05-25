@@ -2,8 +2,8 @@ const model = require('../../../models/discord/economy')
 
 module.exports = {
     name: 'with',
-    requireEconomyAccount: true,
     alts: ['withdraw'],
+    requireEconomyAccount: true,
 
     async execute(Discord, client, message, args, PREFIX){
         

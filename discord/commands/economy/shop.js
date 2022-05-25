@@ -3,9 +3,8 @@ const shopConfig = require('../../shop.json')
 
 module.exports = {
     name: 'shop',
-    requireEconomyAccount: true,
-
     alts: ['market'],
+    requireEconomyAccount: true,
 
     async execute(Discord, client, message, args, PREFIX){
 

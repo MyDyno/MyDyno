@@ -46,6 +46,14 @@ async function main(){
         ap.on('posted', () => {
             console.log('Discord: Posted discord bot stats to Top.gg!')
         })
+
+        process.on("unhandledRejection", e => {
+            console.log('An unhandledRejection occured:\n' + e)
+        });
+        
+        process.on("uncaughtException", e => {
+            console.log('An uncaughtException occured:\n' + e)
+        });
     }
 
     const handlerFiles = fs.readdirSync('./discord/handlers/').filter(file => file.endsWith('.js'));
@@ -53,19 +61,14 @@ async function main(){
         require('./handlers/' + handler)(client, Discord)
     })
 
+    const { setStatus} = require('./setStatus')
+    setStatus(Discord, client)
+
     const { music } = require('./music')
     music(Discord, client)
 
     const { custom } = require('./custom')
     custom(Discord, client)
-
-    process.on("unhandledRejection", e => {
-        console.log('an unhandledRejection occured:\n' + e)
-    });
-    
-    process.on("uncaughtException", e => {
-        console.log('an uncaughtException occured:\n' + e)
-    });
     
     function returnDiscordClient(){
         return client;

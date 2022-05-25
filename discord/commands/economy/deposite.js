@@ -2,8 +2,8 @@ const model = require('../../../models/discord/economy')
 
 module.exports = {
     name: 'dep',
-    requireEconomyAccount: true,
     alts: ['deposite'],
+    requireEconomyAccount: true,
 
     async execute(Discord, client, message, args, PREFIX){
         

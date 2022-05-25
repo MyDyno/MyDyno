@@ -1,6 +1,7 @@
 module.exports = {
     name: 'purge',
     permissions: ['MANAGE_MESSAGES'],
+    cooldown: 5 * 1000,
 
     execute(Discord, client, message, args, PREFIX){
 
