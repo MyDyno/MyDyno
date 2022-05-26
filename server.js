@@ -43,6 +43,11 @@ app.use(session({
     store: store
 }))
 
+app.use((req, res, next) => {
+    config.socket_url = req.hostname
+    next()
+})
+
 app.use('/discord', discordRouter.app)
 app.use('/chat', chatRouter.app)
 app.use('/account', accountRouter.app)
@@ -50,8 +55,6 @@ app.use('/novelcovid', novelcovidRouter.app)
 app.use('/redirect', redirectRouter.app)
 
 app.get('/', (req, res) => {
-    console.log('req.hostname ======> ' + req.hostname)
-    
     res.render('home', {req: req})
 })
 
