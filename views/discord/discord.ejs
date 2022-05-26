@@ -31,7 +31,48 @@
 	<!-- Favicon  -->
     <link rel="icon" href="../assets/discord-bot/images/botIcon.png">
 </head>
+
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers td {
+    text-align: left;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: middle;
+  background-color: #00bfd8;
+  color: white;
+}
+</style>
+
 <body data-spy="scroll" data-target=".fixed-top">
+
+    <% const fs = require('fs') %>
+    <% let clientCommands = new Array() %>
+    <% let commandListArray = new Array(); %>
+    
+    <% const commandFolders = fs.readdirSync('./discord/commands/') %>
+    <% commandFolders.forEach((folder) => { %>
+    <%     const commandFiles = fs.readdirSync('./discord/commands/' + folder).filter(file => file.endsWith('.js')) %>
+    <%     commandFiles.forEach((file) => { %>
+    <%         const command = require('../discord/commands/' + folder + '/' + file) %>
+    <%         commandListArray.push({folder: folder, file: file, command: command.name}) %>
+    <%     }) %>
+    <% }) %>
+    
+    <% let commandArray = commandListArray.reduce((a, b) => Object.assign(a, { [b.folder]: ( a[b.folder] || [] ).concat(b) }), {}) %>
     
     <!-- Preloader -->
 	<div class="spinner-wrapper">
@@ -67,6 +108,15 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#features">Features</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#commands">Commands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#metrics">Metrics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#uptime">Uptime</a>
+                </li>
             </ul>
         </div>
     </nav> <!-- end of navbar -->
@@ -80,7 +130,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="text-container">
-                            <h1><span class="turquoise">MyDyno</span></h1>
+                            <h1><span href="/" class="turquoise">MyDyno</span></h1>
                             <p class="p-large">A Game + Economy + AI chatbot to play games on Discord!</p>
                             <p class="p-large">Used in <%= client.guilds.cache.size %>+ servers!</p>
                             <a class="btn-solid-lg page-scroll" href="/discord/invite">Invite Bot</a>
@@ -104,7 +154,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Bot Tags</h2>
+                    <h2>Features</h2>
                     <p class="p-heading p-large">A Game + Economy + AI chatbot!</p>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -144,58 +194,179 @@
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
+
+        <!-- Details 1 -->
+        <div class="basic-1">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h2>Play games!</h2>
+                            <p>With daily feature updates!</p>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="image-container">
+                            <img class="img-fluid" src="../assets/discord-bot/images/rpsCommand.png" alt="alternative">
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-1 -->
+        <!-- end of details 1 -->
+    
+        
+        <!-- Details 2 -->
+        <div class="basic-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="image-container">
+                            <img class="img-fluid" src="../assets/discord-bot/images/workCommand.png" alt="alternative">
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h2>Work with economy!</h2>
+                            <p>Buy item in shop!</p>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of basic-2 -->
+        <!-- end of details 2 -->
     </div> <!-- end of cards-1 -->
     <!-- end of features -->
 
 
-    <!-- Details 1 -->
-    <div class="basic-1">
+    <!-- Header -->
+    <header id="commands" class="cards-1">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Play games!</h2>
-                        <p>With daily feature updates!</p>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6">
-                    <div class="image-container">
-                        <img class="img-fluid" src="../assets/discord-bot/images/rpsCommand.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-1 -->
-    <!-- end of details 1 -->
 
-    
-    <!-- Details 2 -->
-    <div class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="image-container">
-                        <img class="img-fluid" src="../assets/discord-bot/images/workCommand.png" alt="alternative">
-                    </div> <!-- end of image-container -->
-                </div> <!-- end of col -->
-                <div class="col-lg-6">
-                    <div class="text-container">
-                        <h2>Work with economy!</h2>
-                        <p>Buy item in shop!</p>
-                    </div> <!-- end of text-container -->
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
+            <div class="col-lg-12">
+                <h2>Commands</h2>
+                <p class="p-heading p-large">List of all bot commands!</p>
+            </div> <!-- end of col -->
+
+            <div class="text-container">
+                
+                <table id="customers">
+
+                    <tr>
+                        <th>Category</th>
+                        <th>Commands</th>
+                    </tr>
+
+                    <% Object.keys(commandArray).forEach((key) => { %>
+                        <tr>
+                          <td><%= key %></td>
+                          <td><%= commandArray[key].map(obj => '' + obj.command + '').join(', ') %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+
+            </div> <!-- end of text-container -->
+
         </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of details 2 -->
-    
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+
+    <!-- Header -->
+    <header id="metrics" class="cards-1">
+        <div class="container">
+
+            <div class="col-lg-12">
+                <h2>Metrics</h2>
+                <p class="p-heading p-large">Commands uses metrics!</p>
+            </div> <!-- end of col -->
+
+            <div class="text-container">
+                
+                <table id="customers">
+
+                    <tr>
+                        <% client.commands.forEach((cmd) => { %>
+                            <th class="btn-solid-lg" style="padding: 20px; border-radius: 0rem; font-family: 'Ubuntu Mono'; font-weight: bold; text-align: center; font-size: 1.2em; background-color: #04AA6D;">
+                                <%= cmd.name %> : <%= cmd.useCount %>
+                            </th>
+                        <% }) %>
+                    </tr>
+
+                </table>
+
+            </div> <!-- end of text-container -->
+
+        </div> <!-- end of container -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+
+    <!-- Header -->
+    <header id="uptime" class="cards-1">
+        <div class="container">
+
+            <div class="col-lg-12">
+                <h2>Uptime</h2>
+                <p class="p-heading p-large">Uptime status!</p>
+            </div> <!-- end of col -->
+
+            <div class="text-container">
+                
+                <div class="container" style="color: #333; margin: 0 auto; text-align: center;">
+
+                    <div id="countdown">
+                      <ul>
+                        <li style="display: inline-block; font-size: 1.5em; list-style-type: none; padding: 1em; text-transform: uppercase;"><span style="display: block; font-size: 3rem;" id="days">0</span><br><br>days</li>
+                        <li style="display: inline-block; font-size: 1.5em; list-style-type: none; padding: 1em; text-transform: uppercase;"><span style="display: block; font-size: 3rem;" id="hours">0</span><br><br>Hours</li>
+                        <li style="display: inline-block; font-size: 1.5em; list-style-type: none; padding: 1em; text-transform: uppercase;"><span style="display: block; font-size: 3rem;" id="minutes">0</span><br><br>Minutes</li>
+                        <li style="display: inline-block; font-size: 1.5em; list-style-type: none; padding: 1em; text-transform: uppercase;"><span style="display: block; font-size: 3rem;" id="seconds">0</span><br><br>Seconds</li>
+                      </ul>
+                    </div>
+
+                </div>
+
+                <script>
+                    (function () {
+
+                        const daysCounter = document.getElementById("days")
+                        const hoursCounter = document.getElementById("hours")
+                        const minutesCounter = document.getElementById("minutes")
+                        const secondsCounter = document.getElementById("seconds")
+
+                        let clientUptime = Number("<%= client.uptime %>")
+                        let totalSeconds = (clientUptime / 1000);
+
+                        setInterval(() => {
+                            totalSeconds++
+                            let days = Math.floor(totalSeconds / 86400);
+                            let a = (totalSeconds % 86400)
+                            let hours = Math.floor(a / 3600);
+                            let b = (a % 3600)
+                            let minutes = Math.floor(b / 60);
+                            let seconds = Math.floor(b % 60);
+
+                            daysCounter.innerText = days
+                            hoursCounter.innerText = hours
+                            minutesCounter.innerText = minutes
+                            secondsCounter.innerText = seconds
+                        }, 1000)
+                    }());
+                </script>
+
+            </div> <!-- end of text-container -->
+
+        </div> <!-- end of container -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
 
     <!-- Copyright -->
     <div class="copyright">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="p-small">MyDyno © 2021</p>
+                    <p class="p-small">Copyright © 2021 MyDyno</p>
                 </div> <!-- end of col -->
             </div> <!-- enf of row -->
         </div> <!-- end of container -->

@@ -1,4 +1,5 @@
 const settingModel = require('../../models/discord/setting')
+const commandCountModel = require('../../models/discord/commandCount')
 const fs = require('fs');
 
 module.exports = {
@@ -64,6 +65,7 @@ module.exports = {
                         }
                     }
                     runCommands(command)
+                    command.useCount++
                 }
                 if(command.alts){
                     command.alts.forEach((alt) => {
@@ -77,6 +79,7 @@ module.exports = {
                                 }
                             }
                             runCommands(command)
+                            command.useCount++
                         }
                     })
                 }

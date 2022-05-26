@@ -1,4 +1,5 @@
 const fs = require('fs');
+const commandCountModel = require('../../models/discord/commandCount')
 
 module.exports = async (client, Discord) => {
     const commandFolders = fs.readdirSync('./discord/commands/')
@@ -17,6 +18,8 @@ module.exports = async (client, Discord) => {
                     client.alts.set(alt, command)
                 })
             }
+
+            command.useCount = 0
         }
     }
 }

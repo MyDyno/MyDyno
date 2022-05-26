@@ -4,7 +4,7 @@ const { discordBotMain } = require('../discord/main')
 let client = (new discordBotMain()).discordClient()
 
 app.get('/', (req, res) => {
-    res.render('./discord/discord', {req: req, client: client})
+    res.render('./discord/discord', {req: req, client: client, require: require})
 })
 
 app.get('/invite', (req, res) => {
