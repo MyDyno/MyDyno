@@ -50,6 +50,11 @@ app.use('/novelcovid', novelcovidRouter.app)
 app.use('/redirect', redirectRouter.app)
 
 app.get('/', (req, res) => {
+    console.log('req.socket.remoteAddress ======> ' + req.socket.remoteAddress)
+    console.log('req.headers.host ======> ' + req.headers.host)
+    console.log('req.headers.origin ======> ' + req.headers.origin)
+    console.log('req.hostname ======> ' + req.hostname)
+    
     res.render('home', {req: req})
 })
 
