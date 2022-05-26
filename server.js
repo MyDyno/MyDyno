@@ -51,7 +51,6 @@ app.use('/redirect', redirectRouter.app)
 
 app.get('/', (req, res) => {
     console.log('req.hostname ======> ' + req.hostname)
-    console.log('req.ip ======> ' + req.ip)
     
     res.render('home', {req: req})
 })
