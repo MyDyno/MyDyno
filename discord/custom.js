@@ -5,5 +5,7 @@ module.exports = {
 }
 
 const main = async (Discord, client) => {
-    
+    //dankmemer, play fun, getting caught, bankrob, account dead, commands
+    //dep all
+    //with all
 }

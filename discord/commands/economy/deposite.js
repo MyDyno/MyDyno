@@ -19,6 +19,10 @@ module.exports = {
             return message.channel.send({embeds: [noArgs1]})
         }
 
+        if(args[1] == 'all'.toLowerCase()){
+            return alterMoney(-Number(myModel.cash), Number(myModel.cash), 'Successfully deposited `' + client.config.currencyIcon + myModel.cash + '` to your bank!')
+        }
+
         if(isNaN(args[1])){
 
             const args1NAN = new Discord.MessageEmbed()
@@ -39,23 +43,29 @@ module.exports = {
             return message.channel.send({embeds: [notEnoughCashEmbed]})
         }
 
-        model.findOneAndUpdate(
-            {userId: message.author.id},
-            {
-                $inc:{
-                   cash: -Number(args[1]),
-                   bank: Number(args[1])
+        alterMoney(-Number(args[1]), Number(args[1]), 'Successfully deposited `' + client.config.currencyIcon + args[1] + '` to your bank!')
+
+        function alterMoney(cash, bank, messageReply){
+
+            model.findOneAndUpdate(
+                {userId: message.author.id},
+                {
+                    $inc:{
+                       cash: cash,
+                       bank: bank
+                    }
                 }
-            }
-        )
-        .then(() => {
+            )
+            .then(() => {
+    
+                const depositeSuccessEmbed = new Discord.MessageEmbed()
+                    .setColor('GREEN')
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                    .setDescription(messageReply)
+    
+                message.channel.send({embeds: [depositeSuccessEmbed]})
+            })
+        }
 
-            const depositeSuccessEmbed = new Discord.MessageEmbed()
-                .setColor('GREEN')
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setDescription('Successfully deposited `' + client.config.currencyIcon + args[1] + '`')
-
-            message.channel.send({embeds: [depositeSuccessEmbed]})
-        })
     }
 }
