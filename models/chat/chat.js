@@ -16,4 +16,4 @@ const generalSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('botMessage', generalSchema)
+module.exports = mongoose.model('chat', generalSchema)

@@ -45,7 +45,6 @@ app.use(session({
 
 app.use((req, res, next) => {
     config.socket_url = req.headers.host
-    console.log(req.headers.host)
     next()
 })
 
