@@ -1,5 +1,5 @@
 const settingModel = require('../../models/discord/setting')
-const commandCountModel = require('../../models/discord/commandCount')
+const commandCountModel = require('../../models/discord/commandUseCount')
 const fs = require('fs');
 
 module.exports = {
@@ -12,8 +12,10 @@ module.exports = {
         let token = process.env.token || client.config.betaToken
         let PREFIX;
         let model = await settingModel.findOne({guildId: message.guild.id})
+        let modelName;
 
         if(token == process.env.token){
+            modelName = 'main'
             PREFIX = client.config.mainPrefix
             if(model){
                 if(model.prefix){
@@ -22,8 +24,11 @@ module.exports = {
             }
         }
         else if(token == client.config.betaToken){
+            modelName = 'beta'
             PREFIX = client.config.betaPrefix   
         }
+
+        let myCommandCountModel = await commandCountModel.findOne({name: modelName})
 
         if(message.content == '<@' + client.user.id + '>' || message.content == '<@!' + client.user.id + '>'){
             const embed = new Discord.MessageEmbed()
@@ -66,9 +71,30 @@ module.exports = {
                     }
                     runCommands(command)
                     command.useCount++
+                    await commandCountModel.findOneAndUpdate(
+                        {name: modelName},
+                        {
+                            $pull: {
+                                commands: myCommandCountModel.commands.find((cmd) => cmd.name == command.name)
+                            }
+                        }
+                    )
+                    .then(async () => {
+                        await commandCountModel.findOneAndUpdate(
+                            {name: modelName},
+                            {
+                                $push: {
+                                    commands: {
+                                        name: command.name,
+                                        count: command.useCount
+                                    }
+                                }
+                            }
+                        )
+                    })
                 }
                 if(command.alts){
-                    command.alts.forEach((alt) => {
+                    command.alts.forEach(async (alt) => {
                         if(args[0].toLowerCase() == alt){
                             if(message.author.id !== client.config.botDeveloperId){
                                 if(client.commandsHandler == false){
@@ -80,6 +106,27 @@ module.exports = {
                             }
                             runCommands(command)
                             command.useCount++
+                            await commandCountModel.findOneAndUpdate(
+                                {name: modelName},
+                                {
+                                    $pull: {
+                                        commands: myCommandCountModel.commands.find((cmd) => cmd.name == command.name)
+                                    }
+                                }
+                            )
+                            .then(async () => {
+                                await commandCountModel.findOneAndUpdate(
+                                    {name: modelName},
+                                    {
+                                        $push: {
+                                            commands: {
+                                                name: command.name,
+                                                count: command.useCount
+                                            }
+                                        }
+                                    }
+                                )
+                            })
                         }
                     })
                 }

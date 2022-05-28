@@ -1,5 +1,6 @@
 module.exports = {
     name: 'thigh',
+    nsfw: true,
 
     async execute(Discord, client, message, args, PREFIX){
 
