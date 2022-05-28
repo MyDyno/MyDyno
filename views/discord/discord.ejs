@@ -55,10 +55,75 @@
   background-color: #00bfd8;
   color: white;
 }
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  /* background-color: #2196F3; */
+  background-color: #2521f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
 
 <body data-spy="scroll" data-target=".fixed-top">
 
+    <% let showNsfwCommands %>
     <% const fs = require('fs') %>
     <% let clientCommands = new Array() %>
     <% let commandListArray = new Array(); %>
@@ -117,6 +182,13 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="#uptime">Uptime</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll">NSFW Commands</a>
+                </li>
+                <label class="switch">
+                    <input type="checkbox" id="toggleNsfwButton">
+                    <span class="slider round"></span>
+                </label>
             </ul>
         </div>
     </nav> <!-- end of navbar -->
@@ -250,22 +322,7 @@
 
             <div class="text-container">
                 
-                <table id="customers">
-
-                    <tr>
-                        <th>Category</th>
-                        <th>Commands</th>
-                    </tr>
-
-                    <% Object.keys(commandArray).forEach((key) => { %>
-                        <% if(key !== 'nsfw'){ %>
-                            <tr>
-                              <td><%= key %></td>
-                              <td><%= commandArray[key].map(obj => '' + obj.command + '').join(', ') %></td>
-                            </tr>
-                        <% } %>
-                    <% }) %>
-                </table>
+                <div id="commandList"></div>
 
             </div> <!-- end of text-container -->
 
@@ -285,20 +342,7 @@
 
             <div class="text-container">
                 
-                <table id="customers">
-
-                    <tr>
-                        <% client.commands.forEach((cmd) => { %>
-
-                            <% if(!cmd.nsfw){ %>
-                                <th class="btn-solid-lg" style="padding: 20px; border-radius: 0rem; font-family: 'Ubuntu Mono'; font-weight: bold; text-align: center; font-size: 1.2em; background-color: #04AA6D;">
-                                    <%= cmd.name %> : <%= cmd.useCount %>
-                                </th>
-                            <% } %>
-                        <% }) %>
-                    </tr>
-
-                </table>
+                <div id="commandMetrics"></div>
 
             </div> <!-- end of text-container -->
 
@@ -331,34 +375,6 @@
 
                 </div>
 
-                <script>
-                    (function () {
-
-                        const daysCounter = document.getElementById("days")
-                        const hoursCounter = document.getElementById("hours")
-                        const minutesCounter = document.getElementById("minutes")
-                        const secondsCounter = document.getElementById("seconds")
-
-                        let clientUptime = Number("<%= client.uptime %>")
-                        let totalSeconds = (clientUptime / 1000);
-
-                        setInterval(() => {
-                            totalSeconds++
-                            let days = Math.floor(totalSeconds / 86400);
-                            let a = (totalSeconds % 86400)
-                            let hours = Math.floor(a / 3600);
-                            let b = (a % 3600)
-                            let minutes = Math.floor(b / 60);
-                            let seconds = Math.floor(b % 60);
-
-                            daysCounter.innerText = days
-                            hoursCounter.innerText = hours
-                            minutesCounter.innerText = minutes
-                            secondsCounter.innerText = seconds
-                        }, 1000)
-                    }());
-                </script>
-
             </div> <!-- end of text-container -->
 
         </div> <!-- end of container -->
@@ -389,5 +405,124 @@
     <script src="../assets/discord-bot/js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="../assets/discord-bot/js/scripts.js"></script> <!-- Custom scripts -->
     <script src="../assets/discord-bot/js/contact.js"></script> <!--Contact Script-->
+    
+    <script>
+        let commandListDiv = document.getElementById('commandList')
+        let commandMetricsDiv = document.getElementById('commandMetrics')
+        let toggleNsfwButton = document.getElementById('toggleNsfwButton')
+        
+        if(localStorage.getItem('toggleNSFW') == 'true'){
+            toggleNsfwButton.checked = true
+
+            commandMetricsDiv.innerHTML = 
+            `
+            <table id="customers">
+
+                <tr>
+                    <% client.commands.forEach((cmd) => { %>
+    
+                        <th class="btn-solid-lg" style="padding: 20px; border-radius: 0rem; font-family: 'Ubuntu Mono'; font-weight: bold; text-align: center; font-size: 1.2em; background-color: #04AA6D;">
+                            <%= cmd.name %> : <%= cmd.useCount %>
+                        </th>
+                        
+                    <% }) %>
+                </tr>
+
+            </table>
+            `
+
+            commandListDiv.innerHTML =
+            `
+            <table id="customers">
+
+                <tr>
+                    <th>Category</th>
+                    <th>Commands</th>
+
+                    <% Object.keys(commandArray).forEach((key) => { %>
+                        <tr>
+                          <td><%= key %></td>
+                          <td><%= commandArray[key].map(obj => '' + obj.command + '').join(', ') %></td>
+                        </tr>
+                    <% }) %>
+                </tr>
+
+            </table>
+            `
+        }
+        else if(localStorage.getItem('toggleNSFW') == 'false'){
+            toggleNsfwButton.checked = false
+
+            commandMetricsDiv.innerHTML =
+            `
+            <table id="customers">
+
+                <tr>
+                    <% client.commands.forEach((cmd) => { %>
+        
+                        <% if(!cmd.nsfw){ %>
+                            <th class="btn-solid-lg" style="padding: 20px; border-radius: 0rem; font-family: 'Ubuntu Mono'; font-weight: bold; text-align: center; font-size: 1.2em; background-color: #04AA6D;">
+                                <%= cmd.name %> : <%= cmd.useCount %>
+                            </th>
+                        <% } %>
+                            
+                    <% }) %>
+                </tr>
+
+            </table>
+            `
+
+            commandListDiv.innerHTML =
+            `
+            <table id="customers">
+
+                <tr>
+                    <th>Category</th>
+                    <th>Commands</th>
+
+                    <% Object.keys(commandArray).forEach((key) => { %>
+                        <% if(key !== 'nsfw'){ %>
+                            <tr>
+                                <td><%= key %></td>
+                                <td><%= commandArray[key].map(obj => '' + obj.command + '').join(', ') %></td>
+                            </tr>
+                        <% } %>
+                    <% }) %>
+                </tr>
+
+            </table>
+            `
+        }
+        toggleNsfwButton.addEventListener('click', (checkbox) => {
+            localStorage.setItem('toggleNSFW', checkbox.target.checked)
+            location.reload()
+        })
+        
+        (function () {
+
+            const daysCounter = document.getElementById("days")
+            const hoursCounter = document.getElementById("hours")
+            const minutesCounter = document.getElementById("minutes")
+            const secondsCounter = document.getElementById("seconds")
+
+            let clientUptime = Number("<%= client.uptime %>")
+            let totalSeconds = (clientUptime / 1000);
+
+            setInterval(() => {
+                totalSeconds++
+                let days = Math.floor(totalSeconds / 86400);
+                let a = (totalSeconds % 86400)
+                let hours = Math.floor(a / 3600);
+                let b = (a % 3600)
+                let minutes = Math.floor(b / 60);
+                let seconds = Math.floor(b % 60);
+
+                daysCounter.innerText = days
+                hoursCounter.innerText = hours
+                minutesCounter.innerText = minutes
+                secondsCounter.innerText = seconds
+            }, 1000)
+        }());
+    </script>
 </body>
 </html>

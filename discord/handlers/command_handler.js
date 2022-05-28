@@ -21,7 +21,7 @@ module.exports = async (client, Discord) => {
         await createdModel.save()
     }
 
-    //error: if myCommandCountModel does not exist, it goes to next line of code before creating model
+    //error: if myCommandCountModel does not exist, it goes to next line of code before creating model //error on line 45 "commands not found"
 
     let toPushToModel = new Array()
 
