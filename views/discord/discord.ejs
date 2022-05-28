@@ -322,7 +322,25 @@ input:checked + .slider:before {
 
             <div class="text-container">
                 
-                <div id="commandList"></div>
+                <div id="commandList">
+                    <table id="customers">
+
+                        <tr>
+                            <th>Category</th>
+                            <th>Commands</th>
+        
+                            <% Object.keys(commandArray).forEach((key) => { %>
+                                <% if(key !== 'nsfw'){ %>
+                                    <tr>
+                                        <td><%= key %></td>
+                                        <td><%= commandArray[key].map(obj => '' + obj.command + '').join(', ') %></td>
+                                    </tr>
+                                <% } %>
+                            <% }) %>
+                        </tr>
+        
+                    </table>
+                </div>
 
             </div> <!-- end of text-container -->
 
@@ -342,7 +360,23 @@ input:checked + .slider:before {
 
             <div class="text-container">
                 
-                <div id="commandMetrics"></div>
+                <div id="commandMetrics">
+                    <table id="customers">
+
+                        <tr>
+                            <% client.commands.forEach((cmd) => { %>
+                
+                                <% if(!cmd.nsfw){ %>
+                                    <th class="btn-solid-lg" style="padding: 20px; border-radius: 0rem; font-family: 'Ubuntu Mono'; font-weight: bold; text-align: center; font-size: 1.2em; background-color: #04AA6D;">
+                                        <%= cmd.name %> : <%= cmd.useCount %>
+                                    </th>
+                                <% } %>
+                                    
+                            <% }) %>
+                        </tr>
+        
+                    </table>
+                </div>
 
             </div> <!-- end of text-container -->
 
