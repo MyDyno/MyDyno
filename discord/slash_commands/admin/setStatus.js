@@ -9,18 +9,40 @@ module.exports = {
             .setName('type')
             .setDescription('Choose status type!')
             .setRequired(true)
-            .addChoice('COMPETING', 'COMPETING')
-            .addChoice('LISTENING', 'LISTENING')
-            .addChoice('PLAYING', 'PLAYING')
-            .addChoice('WATCHING', 'WATCHING')
+            .addChoices(
+                {
+                    name: 'COMPETING',
+                    value: 'COMPETING',
+                },
+                {
+                    name: 'LISTENING',
+                    value: 'LISTENING',
+                },
+                {
+                    name: 'PLAYING',
+                    value: 'PLAYING',
+                },
+                {
+                    name: 'WATCHING',
+                    value: 'WATCHING',
+                }
+            )
         )
         .addStringOption(option => 
             option
             .setName('default-status')
             .setDescription('Choose status text!')
             .setRequired(false)
-            .addChoice('in ${client.guilds.cache.size} guilds!', 'guild_count')
-            .addChoice('with ${client.users.cache.size} users!', 'user_count')
+            .addChoices(
+                {
+                    name: 'in ${client.guilds.cache.size} guilds!',
+                    value:'guild_count',
+                },
+                {
+                    name: 'with ${client.users.cache.size} users!',
+                    value:'user_count',
+                }
+            )
         )
         .addStringOption(option => 
             option

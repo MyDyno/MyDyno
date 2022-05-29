@@ -24,7 +24,7 @@ module.exports = {
                     .addFields(
                         {
                             name: '📥 Input',
-                            value: `\`\`\`js\n${code}}\n\`\`\``,
+                            value: `\`\`\`js\n${code}\n\`\`\``,
                         },
                         {
                             name: '📤 Output',

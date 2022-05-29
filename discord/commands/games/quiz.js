@@ -1,16 +1,12 @@
-const model = require('../../../models/discord/economy')
 const fetch = require('node-fetch')
-const earnings = require('../../earnings.json')
 
 module.exports = {
     name: 'quiz',
-    requireEconomyAccount: true,
-    cooldown: 20 * 1000,
+    cooldown: 5 * 1000,
 
     async execute(Discord, client, message, args, PREFIX){
         
         let quiz_type_api_link = "https://opentdb.com/api.php?amount=5&category=9&type=boolean";
-        let randomMoney = Math.floor(Math.random() * (earnings.quizHighRange - earnings.quizLowRange + 1)) + earnings.quizLowRange;
 
         let response = await fetch(quiz_type_api_link);
         const data = await response.json();
@@ -54,64 +50,44 @@ module.exports = {
                 .then(async (collected) => {
                     const reaction = collected.first()
                     if (reaction.emoji.name == '✅' && correctAnswer == '✅') {
-                        model.findOneAndUpdate(
-                            {userId: message.author.id},
-                            {
-                                $inc:{
-                                    cash: randomMoney
+                        const quiz_won_embed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                            .addFields(
+                                {
+                                    name: 'Question',
+                                    value: question,
+                                    inline: false,
+                                },
+                                {
+                                    name: 'Result',
+                                    value: '✅ Yey you got the correct answer!',
+                                    inline: false,
                                 }
-                            }
-                        )
-                        .then(() => {
-                            const quiz_won_embed = new Discord.MessageEmbed()
-                                .setColor('GREEN')
-                                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                .addFields(
-                                    {
-                                        name: 'Question',
-                                        value: question,
-                                        inline: false,
-                                    },
-                                    {
-                                        name: 'Result',
-                                        value: '✅ Yey you got the correct answer and won `' + client.config.currencyIcon + randomMoney + '`!',
-                                        inline: false,
-                                    }
-                                )
-                                .setTimestamp()
-                                .setFooter(client.user.username);
-                            q_message.edit({embeds: [quiz_won_embed]})
-                        })
+                            )
+                            .setTimestamp()
+                            .setFooter(client.user.username);
+                        q_message.edit({embeds: [quiz_won_embed]})
                     }
                     else if (reaction.emoji.name == '❌' && correctAnswer == '❌') {
-                        model.findOneAndUpdate(
-                            {userId: message.author.id},
-                            {
-                                $inc:{
-                                    cash: randomMoney
+                        const quiz_won_embed = new Discord.MessageEmbed()
+                            .setColor('GREEN')
+                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                            .addFields(
+                                {
+                                    name: 'Question',
+                                    value: question,
+                                    inline: false,
+                                },
+                                {
+                                    name: 'Result',
+                                    value: '✅ Yey you got the correct answer!',
+                                    inline: false,
                                 }
-                            }
-                        )
-                        .then(() => {
-                            const quiz_won_embed = new Discord.MessageEmbed()
-                                .setColor('GREEN')
-                                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                .addFields(
-                                    {
-                                        name: 'Question',
-                                        value: question,
-                                        inline: false,
-                                    },
-                                    {
-                                        name: 'Result',
-                                        value: '✅ Yey you got the correct answer and won `' + client.config.currencyIcon + randomMoney + '`!',
-                                        inline: false,
-                                    }
-                                )
-                                .setTimestamp()
-                                .setFooter(client.user.username);
-                            q_message.edit({embeds: [quiz_won_embed]})
-                        })
+                            )
+                            .setTimestamp()
+                            .setFooter(client.user.username);
+                        q_message.edit({embeds: [quiz_won_embed]})
                     }
                     else if (reaction.emoji.name == '✅' && correctAnswer == '❌') {
                         const quiz_lost_embed = new Discord.MessageEmbed()

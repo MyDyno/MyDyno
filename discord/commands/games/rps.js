@@ -1,15 +1,9 @@
-const model = require('../../../models/discord/economy')
-const earnings = require('../../earnings.json')
-
 module.exports = {
     name: 'rps',
     alts: ['rockpaperscissor'],
-    requireEconomyAccount: true,
-    cooldown: 20 * 1000,
+    cooldown: 5 * 1000,
 
     async execute(Discord, client, message){
-        
-        let randomMoney = Math.floor(Math.random() * (earnings.rpsHighRange - earnings.rpsLowRange + 1)) + earnings.rpsLowRange;
 
         const rps_embed = new Discord.MessageEmbed()
             .setTitle('Rock, Paper, Scissor')
@@ -36,33 +30,22 @@ module.exports = {
 
                 if ((random_bot_choice === "✂" && reaction.emoji.name === "🧱") || (random_bot_choice === "🧱" && reaction.emoji.name === "📰") || (random_bot_choice === "📰" && reaction.emoji.name === "✂")){
 
-                    model.findOneAndUpdate(
-                        {userId: message.author.id},
-                        {
-                            $inc:{
-                                cash: randomMoney
-                            }
-                        }
-                    )
+                    const rps_won_embed = new Discord.MessageEmbed()
+                        .setColor('GREEN')
+                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                        .setDescription(
+                            '✅ Yey you won!' + 
+                            '\n\n ' + 
+                            'Choices:' + 
+                            '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
+                        )
+                        .setTimestamp()
+                        .setFooter(client.user.username);
+
+                    r_message.edit({embeds: [rps_won_embed]})
                     .then(() => {
-
-                        const rps_won_embed = new Discord.MessageEmbed()
-                            .setColor('GREEN')
-                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                            .setDescription(
-                                '✅ Yey you won `' + client.config.currencyIcon + randomMoney + '`' + 
-                                '\n\n ' + 
-                                'Choices:' + 
-                                '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
-                            )
-                            .setTimestamp()
-                            .setFooter(client.user.username);
-
-                        r_message.edit({embeds: [rps_won_embed]})
-                        .then(() => {
-                            r_message.reactions.removeAll();
-                        });
-                    })
+                        r_message.reactions.removeAll();
+                    });
                 }
                 else if (random_bot_choice === reaction.emoji.name){
 
@@ -70,7 +53,7 @@ module.exports = {
                         .setColor('BLUE')
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setDescription(
-                            '🚫 Its a tie!.' + 
+                            '🚫 Its a tie!' + 
                             '\n\n ' + 
                             'Choices:' + 
                             '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
@@ -89,7 +72,7 @@ module.exports = {
                         .setColor('RED')
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setDescription(
-                            '❌ Your lost it!.' + 
+                            '❌ You lost it!' + 
                             '\n\n ' + 'Choices:' + 
                             '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
                         )

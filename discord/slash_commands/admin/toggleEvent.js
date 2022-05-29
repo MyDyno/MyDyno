@@ -9,16 +9,32 @@ module.exports = {
             .setName('event')
             .setDescription('Choose event!')
             .setRequired(true)
-            .addChoice('messageCreate', 'messageCreate')
-            .addChoice('interactionCreate', 'interactionCreate')
+            .addChoices(
+                {
+                    name: 'messageCreate', 
+                    value: 'messageCreate',
+                },
+                {
+                    name: 'interactionCreat', 
+                    value: 'interactionCreate',
+                }
+            )
         )
         .addStringOption(option => 
             option
             .setName('toggle')
             .setDescription('Enable/Disable')
             .setRequired(true)
-            .addChoice('Enable', 'enabled')
-            .addChoice('Disable', 'disabled')
+            .addChoices(
+                {
+                    name: 'Enable',
+                    value: 'enabled',
+                },
+                {
+                    name: 'Disable',
+                    value: 'disabled',
+                }
+            )
         ),
 
     async execute(Discord, client, interaction){
