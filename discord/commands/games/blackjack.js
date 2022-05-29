@@ -7,5 +7,6 @@ module.exports = {
 
     async execute(Discord, client, message, args, PREFIX){
         blackjack(message)
+        //https://discord-blackjack.gitbook.io/discord-blackjack/examples
     }        
 }
