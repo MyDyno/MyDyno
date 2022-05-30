@@ -16,6 +16,9 @@ const main = async (Discord, client) => {
             if(message.author.id == '780364358529187870'){
                 embedColour = 'RED'
             }
+            if(message.author.bot){
+                embedColour = 'GREEN'
+            }
             storeChannel.send({
                 embeds: [
                     new Discord.MessageEmbed()
