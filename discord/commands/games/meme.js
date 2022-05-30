@@ -23,7 +23,7 @@ module.exports = {
                 meme_embed.setURL(`${memeUrl}`)
                 meme_embed.setColor('RANDOM')
                 meme_embed.setImage(memeImage);
-                meme_embed.setFooter(`👍 ${memeUpvotes} 💬 ${memeNumComments}`);                        
+                meme_embed.setFooter({text: `👍 ${memeUpvotes} 💬 ${memeNumComments}`});
         
                 if(memeUpvotes <= 1000){
                     generateMeme()

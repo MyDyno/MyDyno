@@ -26,7 +26,7 @@ module.exports = {
             .setDescription('To buy an item use the `buy` command, E.g. `' + PREFIX + 'buy [Item]`')
             .addFields(shopItems)
             .setTimestamp()
-            .setFooter(client.user.username)
+            .setFooter({text: client.user.username})
 
         message.channel.send({embeds: [shopEmbed]})
 

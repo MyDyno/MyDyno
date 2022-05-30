@@ -31,7 +31,7 @@ module.exports = {
                 },
             )
             .setTimestamp()
-            .setFooter(client.user.username);
+            .setFooter({text: client.user.username});
 
         message.channel.send({ embeds: [embed] })
     }

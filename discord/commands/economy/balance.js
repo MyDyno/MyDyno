@@ -28,7 +28,7 @@ module.exports = {
                     },
                 )
                 .setTimestamp()
-                .setFooter(client.user.username)    
+                .setFooter({text: client.user.username})    
                 
             message.channel.send({embeds: [balEmbed]})
         }
@@ -62,7 +62,7 @@ module.exports = {
                     },
                 )
                 .setTimestamp()
-                .setFooter(client.user.username)
+                .setFooter({text: client.user.username})
 
             message.channel.send({embeds: [mentionUserBalEmbed]})
         }

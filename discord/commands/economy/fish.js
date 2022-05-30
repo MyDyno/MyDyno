@@ -37,7 +37,7 @@ module.exports = {
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('✅ You earned `' + client.config.currencyIcon + randomMoney + '` by fishing!')
                 .setTimestamp()
-                .setFooter(client.user.username);
+                .setFooter({text: client.user.username});
 
             message.channel.send({embeds: [fishEarnedEmbed]})
         })

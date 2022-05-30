@@ -39,7 +39,7 @@ module.exports = {
                 }
             )   
             .setTimestamp()
-            .setFooter(client.user.username)
+            .setFooter({text: client.user.username})
         message.channel.send({embeds: [quiz_embed]})
         .then((q_message) => {
             q_message.react('✅').then(q_message.react('❌'))
@@ -66,7 +66,7 @@ module.exports = {
                                 }
                             )
                             .setTimestamp()
-                            .setFooter(client.user.username);
+                            .setFooter({text: client.user.username});
                         q_message.edit({embeds: [quiz_won_embed]})
                     }
                     else if (reaction.emoji.name == '❌' && correctAnswer == '❌') {
@@ -86,7 +86,7 @@ module.exports = {
                                 }
                             )
                             .setTimestamp()
-                            .setFooter(client.user.username);
+                            .setFooter({text: client.user.username});
                         q_message.edit({embeds: [quiz_won_embed]})
                     }
                     else if (reaction.emoji.name == '✅' && correctAnswer == '❌') {
@@ -106,7 +106,7 @@ module.exports = {
                                 }
                             )
                             .setTimestamp()
-                            .setFooter(client.user.username);
+                            .setFooter({text: client.user.username});
                         q_message.edit({embeds: [quiz_lost_embed]})
                     }
                     else if (reaction.emoji.name == '❌' && correctAnswer == '✅') {
@@ -126,7 +126,7 @@ module.exports = {
                                 }
                             )
                             .setTimestamp()
-                            .setFooter(client.user.username);
+                            .setFooter({text: client.user.username});
                         q_message.edit({embeds: [quiz_lost_embed]})
                     }
                 })
@@ -147,7 +147,7 @@ module.exports = {
                             }
                         )
                         .setTimestamp()
-                        .setFooter(client.user.username);
+                        .setFooter({text: client.user.username});
                         q_message.edit({embeds: [no_response]})
                     .then(() => {
                         q_message.reactions.removeAll();

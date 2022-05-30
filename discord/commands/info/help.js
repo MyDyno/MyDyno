@@ -62,7 +62,7 @@ module.exports = {
                         ':small_blue_diamond: [Support Server](' + client.config.supportServer + ')' + '\n'
                 }
             )
-            .setFooter(client.user.username + ' developed by ' + client.config.botDeveloper)
+            .setFooter({text: client.user.username + ' developed by ' + client.config.botDeveloper})
 
         message.channel.send({embeds: [helpEmbed]})
     }

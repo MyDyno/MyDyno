@@ -10,7 +10,7 @@ module.exports = {
             .setColor('BLUE')
             .setDescription('React to play the game!')
             .setTimestamp()
-            .setFooter(client.user.username);
+            .setFooter({text: client.user.username});
 
         message.channel.send({embeds: [rps_embed]})
         .then((r_message) => {
@@ -40,7 +40,7 @@ module.exports = {
                             '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
                         )
                         .setTimestamp()
-                        .setFooter(client.user.username);
+                        .setFooter({text: client.user.username});
 
                     r_message.edit({embeds: [rps_won_embed]})
                     .then(() => {
@@ -59,7 +59,7 @@ module.exports = {
                             '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
                         )
                         .setTimestamp()
-                        .setFooter(client.user.username);
+                        .setFooter({text: client.user.username});
                 
                     r_message.edit({embeds: [rps_tie_embed]})
                     .then(() => {
@@ -77,7 +77,7 @@ module.exports = {
                             '\nYou chose ' + reaction.emoji.name + ',  and I chose ' + random_bot_choice + '!'
                         )
                         .setTimestamp()
-                        .setFooter(client.user.username);
+                        .setFooter({text: client.user.username});
                 
                     r_message.edit({embeds: [rps_loose_embed]})
                     .then(() => {
@@ -92,7 +92,7 @@ module.exports = {
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setDescription('❌ Game has been cancelled since you did not reposnd in time!')
                     .setTimestamp()
-                    .setFooter(client.user.username);
+                    .setFooter({text: client.user.username});
 
                 r_message.edit({embeds: [no_response]})
                 .then(() => {

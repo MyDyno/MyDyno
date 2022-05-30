@@ -42,7 +42,7 @@ module.exports = {
                         },
                     )
                     .setTimestamp()
-                    .setFooter(client.user.username)
+                    .setFooter({text: client.user.username})
 
                 await interaction.reply({ embeds: [embed], ephemeral: true });
             }

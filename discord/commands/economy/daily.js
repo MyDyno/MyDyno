@@ -25,7 +25,7 @@ module.exports = {
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setDescription('✅ You recieved your daily `' + client.config.currencyIcon + randomMoney + '`')
                 .setTimestamp()
-                .setFooter(client.user.username);
+                .setFooter({text: client.user.username});
 
             message.channel.send({embeds: [EarnedEmbed]})
         })           

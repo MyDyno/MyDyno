@@ -21,7 +21,7 @@ module.exports = {
                 },
             )
             .setTimestamp()
-            .setFooter("" + guild.name + "")
+            .setFooter({text: "" + guild.name + ""})
         
         logsChannel.send({embeds: [logMessage] })
     }

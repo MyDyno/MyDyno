@@ -24,7 +24,7 @@ module.exports = {
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .addFields(inventory)
             .setTimestamp()
-            .setFooter(client.user.username)
+            .setFooter({text: client.user.username})
 
         if(inventory.length == 0){
             inventoryEmbed.setDescription('❌ You dont own any items yet!')

@@ -315,7 +315,7 @@ module.exports = {
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setDescription('🕕 You are in cooldown for: `' + days + ' days,` `' + hours + ' hours`, `' + minutes + ' minutes`, `' + seconds + ' seconds!`')
                         .setTimestamp()
-                        .setFooter(client.user.username)
+                        .setFooter({text: client.user.username})
         
                     message.channel.send({embeds: [dailyCooldownEmbed]})
                 }

@@ -14,7 +14,7 @@ module.exports = {
                 .setURL(user.displayAvatarURL() + '?size=1024')
                 .setColor('BLUE')
                 .setImage(user.displayAvatarURL() + '?size=1024')
-                .setFooter('Requested by ' + message.author.tag)
+                .setFooter({text: 'Requested by ' + message.author.tag})
 
         ]})
         

@@ -22,7 +22,7 @@ module.exports = {
                 .setColor('BLUE')
                 .setDescription('Invite me: ' + client.config.botInvite)
                 .setTimestamp()
-                .setFooter(client.user.username)
+                .setFooter({text: client.user.username})
 
             let advChannel = client.channels.cache.find(ch => ch.id == '879246112526049320')
 
