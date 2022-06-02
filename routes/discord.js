@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express.Router()
+const config = require('../config.json')
 const { discordBotMain } = require('../discord/main')
 let client = (new discordBotMain()).discordClient()
 
 app.get('/', (req, res) => {
-    res.render('./discord/discord', {req: req, client: client, require: require})
+    res.render('./discord/discord', {req: req, client: client, require: require, config: config,})
 })
 
 app.get('/invite', (req, res) => {

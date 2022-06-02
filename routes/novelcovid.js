@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express.Router()
 const covid = require('novelcovid');
+const config = require('../config.json')
 
 app.get('/', async (req, res) => {
     const covidStats = await covid.all();
@@ -16,7 +17,7 @@ app.get('/', async (req, res) => {
         {name: 'Tested', value: covidStats.tests.toLocaleString(), inline: true}
     ]
 
-    res.render('novelcovid/novelcovid', { req: req, data: data })
+    res.render('novelcovid/novelcovid', { req: req, data: data, config: config })
 })
 
 module.exports = {app: app}

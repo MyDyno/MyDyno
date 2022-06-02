@@ -5,7 +5,7 @@ const config = require('../config.json')
 const nodemailer = require('nodemailer')
 let transporter = nodemailer.createTransport({service: 'gmail', auth: {user: config.MyDyno_User, pass: config.MyDyno_Pass}});
 
-const settingAuth = (req, res, next) => {
+const profileAuth = (req, res, next) => {
     if(req.session.isAuth){
         next()
     }
@@ -23,16 +23,16 @@ const LoginRegisterAuth = (req, res, next) => {
     }
 }
 
-app.get('/settings', settingAuth, (req, res) => {
-    res.render('./account/settings/settings', {req: req, res: res, User: User})
+app.get('/profile', profileAuth, (req, res) => {
+    res.render('./account/profile/profile', {req: req, res: res, User: User, config: config})
 })
 
 app.get('/login', LoginRegisterAuth, (req, res) => {
-    res.render('./account/login/login', {req: req, status: 'Not Registered? <a href="/account/register">Register Now!</a>'})
+    res.render('./account/login/login', {req: req, config: config, status: 'Not Registered? <a href="/account/register">Register Now!</a>'})
 })
 
 app.get('/register', LoginRegisterAuth, (req, res) => {
-    res.render('./account/register/register', {req: req, status: 'Already have an account? <a href="/account/login">Login Now!</a>'})
+    res.render('./account/register/register', {req: req, config: config, status: 'Already have an account? <a href="/account/login">Login Now!</a>'})
 })
 
 app.post('/login', async (req, res) => {
@@ -42,12 +42,12 @@ app.post('/login', async (req, res) => {
     let matchPasswordLoginUser = loginUserArray.find((user) => user.email.toUpperCase() == req.body.email.toUpperCase() && user.password == req.body.password)
 
     if(!matchEmailLoginUser){
-        res.render('./account/login/login', {req: req, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'}) 
+        res.render('./account/login/login', {req: req, config: config, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'}) 
     }
     else{
 
         if(!matchPasswordLoginUser){
-            res.render('./account/login/login', {req: req, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'})
+            res.render('./account/login/login', {req: req, config: config, status: 'Wrong credentials!, please try again!<br>Not Registered? <a href="/account/register">Register Now!</a>'})
         }
         else{
             saveLoginData(req, res)
@@ -62,12 +62,12 @@ app.post('/register', async (req, res) => {
     let matchUsernameRegisterUser = registerUserArray.find((user) => user.username.toUpperCase() == req.body.username.toUpperCase())
 
     if(matchEmailRegisterUser){
-        res.render('./account/register/register', {req: req, status: 'The email or username is already taken!, please try again with a unique email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+        res.render('./account/register/register', {req: req, config: config, status: 'The email or username is already taken!, please try again with a unique email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
     }
     else{
 
         if(matchUsernameRegisterUser){
-            res.render('./account/register/register', {req: req, status: 'The email or username is already taken!, please try again with a unique username!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+            res.render('./account/register/register', {req: req, config: config, status: 'The email or username is already taken!, please try again with a unique username!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
         }
         else{
             registerNext(req, res)
@@ -82,7 +82,7 @@ app.post('/verify', (req, res) => {
         saveData(req, res)
     }
     else{
-        res.render('./account/verify/verify', {req: req, status: 'Code not matched!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+        res.render('./account/verify/verify', {req: req, config: config, status: 'Code not matched!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
     }
 })
 
@@ -134,7 +134,7 @@ function registerNext(req, res){
     let randomCode = Math.floor(Math.random() * 999999) + 111111;
 
     let mailOptions = {
-        from: 'mydyno.xyz@gmail.com',
+        from: config.MyDyno_User,
         to: req.body.email,
         subject: 'Email Verification',
         html: 
@@ -210,7 +210,7 @@ function registerNext(req, res){
     transporter.sendMail(mailOptions, (error, data) => {
 
         if(error){ 
-            res.render('./account/register/register', {req: req, status: 'Couldn\'t send verification email!, please try again!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+            res.render('./account/register/register', {req: req, config: config, status: 'Couldn\'t send verification email!, please try again!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
             console.log('Error: ' + error)
         }
         else{
@@ -223,7 +223,7 @@ function registerNext(req, res){
             req.session.email = req.body.email
             req.session.password = req.body.password
             req.session.icon = req.body.icon
-            res.render('./account/verify/verify', {req: req, status: 'A verification code has been sent to your email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
+            res.render('./account/verify/verify', {req: req, config: config, status: 'A verification code has been sent to your email!<br>Already have an account? <a href="/account/login">Login Now!</a>'})
         }
     })
 }

@@ -1,53 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" rel="stylesheet">
-    <script data-ad-client="ca-pub-9509840044265409" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
     <title>MyDyno</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="../assets/main/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,700|Raleway:400,700&display=swap" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/main/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="../assets/main/css/responsive.css" rel="stylesheet" />
+    <link rel="icon" href="../assets/icon.png">
 </head>
+
 <body>
-<%- include('./_nav') %>
+    <div class="hero_area">
 
-<div>
+        <%- include('./_nav.ejs') %>
 
-    <div class="text-center p-3">
+        <!-- slider section -->
+        <section class=" slider_section position-relative">
+            <div class="container">
+                <div class="row">
 
-        <h1 style="font-family: 'Times New Roman', Times, serif;">Nothing is here!</h1>
+                    <div class="col-md-7">
 
-        <br><br>
+                        <div class="detail-box">
+                            <h2>Under Development!</h2>
+                            <h1>MyDyno</h1>
 
-        <% if(req.session.isAuth){ %>
+                            <div>
+                                <% if(req.session.isAuth){ %>
+                                    <a href="/chat">Chat</a>
+                                <% } else{ %>
+                                    <a href="/account/login">Login</a>
+                                    <a href="/account/register">Register</a>
+                                <% } %>
+                            </div>
+                        </div>
 
-        <h3 style="font-family: 'Times New Roman', Times, serif;">You are logged in as "<%= req.session.username %>"</h3>
-        
-        <a class="btn btn-success" href="/discord">Discord</a>
-        <a class="btn btn-success" href="/chat">Chat</a>
-        <a class="btn btn-success" href="/novelcovid">Novel Covid</a>
-        <a class="btn btn-success" href="/account/settings">Settings</a>
+                    </div>
 
-        <% }else{ %>
+                    <div class="col-md-5">
+                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <div class="img-box">
+                                        <img src="../assets/right_side_icon.png" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <h3 style="font-family: 'Times New Roman', Times, serif;">You are not logged in</h3>
-
-        <a class="btn btn-success" href="/account/login">Login</a>
-        <a class="btn btn-success" href="/account/register">Register</a>
-
-        <% } %>
-
-        <br><br><br>
-
-        <h1 style="font-family: 'Times New Roman', Times, serif;">Developed by Raunak Raj!</h1>
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-    </div>
-
-</div>
+                </div>
+          </div>
+        </section>
+        <!-- end slider section -->
     
-<%- include('./_footer') %>
+        <%- include('./_footer.ejs') %>
+
+    </div>    
 </body>
+
+<script type="text/javascript" src="../assets/main/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../assets/main/js/bootstrap.js"></script>
+
 </html>

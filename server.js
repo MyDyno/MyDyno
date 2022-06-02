@@ -7,6 +7,19 @@ const mongoose = require('mongoose');
 const session = require('express-session')
 const MongoDBSession = require('connect-mongodb-session')(session)
 const config = require('./config.json')
+const newsLetterSubsModel = require('./models/subscribers/newsletter')
+
+async function startupCmd(){
+    let myModel = await newsLetterSubsModel.findOne({name: 'Website'})
+    if(!myModel){
+        let toCreate = await newsLetterSubsModel.create({
+            name: 'Website',
+            subscribers: []
+        })
+        await toCreate.save()
+    }
+}
+startupCmd()
 
 const discordRouter = require('./routes/discord')
 const chatRouter = require('./routes/chat')
@@ -55,7 +68,28 @@ app.use('/novelcovid', novelcovidRouter.app)
 app.use('/redirect', redirectRouter.app)
 
 app.get('/', (req, res) => {
-    res.render('home', {req: req})
+    res.render('home', {req: req, config: config})
+})
+
+app.post('/newsletterSUB', async (req, res) => {
+
+    let myModel = await newsLetterSubsModel.findOne({name: 'Website'})
+    if(myModel.subscribers.find((sub) => sub.email == req.body.subEmail)){
+        return res.redirect('/')
+    }
+    newsLetterSubsModel.findOneAndUpdate(
+        {name: 'Website'},
+        {
+            $push: {
+                subscribers: {
+                    email: req.body.subEmail
+                }
+            }
+        }
+    )
+    .then(() => {
+        res.redirect('/')
+    })
 })
 
 let port = process.env.PORT || 5000 || 8000

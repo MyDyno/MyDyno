@@ -1,17 +1,67 @@
-<footer class="bg-dark text-center text-white">
+<!-- info section -->
+<section class="info_section layout_padding-top">
+  <!-- <div class="info_logo-box">
+    <h2>MyDyno</h2>
+  </div> -->
 
-  <div class="container p-4 pb-0">
-    <section class="mb-4">
+  <div class="container layout_padding2">
+    <div class="row">
 
-      <a class="btn btn-outline-light btn-floating m-1" href="/redirect/github" role="button">
-        <i class="fab fa-github"></i>
-      </a>
-      <a class="btn btn-outline-light btn-floating m-1" href="/redirect/discord" role="button">
-        <i class="fab fa-discord"></i>
-      </a>
+      <div class="col-md-3">
+        <h5>About Us</h5>
+        <p>We are a developing platform.</p>
+      </div>
 
-    </section>
+      <div class="col-md-3">
+        <h5>Useful Link</h5>
+        <ul>
+          <li><a href="/novelcovid"><img src="../assets/main/images/icons8-corona-64.png" height="20" width="20" alt=""> Novelcovid</a></li>
+          <li><a href="/chat"><img src="../assets/main/images/icons8-chat-64.png" height="20" width="20" alt=""> Chat</a></li>
+          <li><a href="/discord"><img src="../assets/main/images/icons8-discord-64.png" height="20" width="20" alt=""> Discord</a></li>
+          <li><a href="/account/profile"><img src="../assets/main/images/icons8-settings-64.png" height="20" width="20" alt=""> Profile</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-3">
+        <h5>Contact Us</h5>
+        <p><img src="../assets/main/images/icons8-gmail-64_color.png" height="20" width="20" alt=""> <%= config.MyDyno_User %></p>
+      </div>
+
+      <div class="col-md-3">
+        <div class="subscribe_container">
+          <h5>Newsletter</h5>
+          <div class="form_container">
+            <form id="newsletterForm" method="POST" action="/newsletterSUB">
+              <input type="email" name="subEmail" placeholder="Enter your email" required>
+              <button type="submit">Subscribe</button>
+            </form>
+            <script>
+              document.getElementById('newsletterForm')
+              .addEventListener('submit', () => {
+                alert('Thank you for subscribing to our newletter. We will keep your updated!')
+              })
+            </script>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">Mydyno</div>
 
-</footer>
+  <div class="container">
+    <div class="social_container">
+      <div class="social-box">
+        <a href="/redirect/github"><img src="../assets/main/images/icons8-github-64.png" alt=""></a>
+        <a href="/redirect/discord"><img src="../assets/main/images/icons8-discord-64.png" alt=""></a>
+        <a href="mailto:<%= config.MyDyno_User %>"><img src="../assets/main/images/icons8-gmail-64.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- end info section -->
+<!-- footer section -->
+<section class="container-fluid footer_section">
+  <p>Copyright &copy 2021 MyDyno</p>
+</section>
+<!-- footer section -->
