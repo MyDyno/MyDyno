@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const subdomain = require('express-subdomain')
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 module.exports = {io: io}
@@ -61,6 +62,7 @@ app.use((req, res, next) => {
     next()
 })
 
+app.use(subdomain('discord', discordRouter.app))
 app.use('/discord', discordRouter.app)
 app.use('/chat', chatRouter.app)
 app.use('/account', accountRouter.app)
