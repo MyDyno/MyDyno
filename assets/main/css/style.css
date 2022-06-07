@@ -61,7 +61,7 @@ body {
   height: 100vh;
   position: relative;
   background: -webkit-gradient(linear, left top, right top, color-stop(50%, #f2f7fd), color-stop(45%, #1d1e31));
-  background: linear-gradient(to right, #f2f7fd 50%, #1d1e31 45%);
+  background: linear-gradient(to right, #f2f7fd 55%, #1d1e31 55%);
 }
 
 .sub_page .hero_area {

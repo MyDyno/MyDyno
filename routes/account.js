@@ -23,10 +23,6 @@ const LoginRegisterAuth = (req, res, next) => {
     }
 }
 
-app.get('/', (req, res) => {
-    res.redirect('/login')
-})
-
 app.get('/profile', profileAuth, (req, res) => {
     res.render('./account/profile/profile', {req: req, res: res, User: User, config: config})
 })
