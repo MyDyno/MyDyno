@@ -7,5 +7,7 @@
     "MyDyno_User": "mydyno.xyz@gmail.com",
     "MyDyno_Pass": "nabwxoobzkzcbtjg",
 
-    "session_secret": "_secret"
+    "session_secret": "_secret",
+
+    "email": "info@mydyno.app"
 }
