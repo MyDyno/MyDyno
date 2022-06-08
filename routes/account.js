@@ -134,7 +134,7 @@ function registerNext(req, res){
     let randomCode = Math.floor(Math.random() * 999999) + 111111;
 
     let mailOptions = {
-        from: config.MyDyno_User,
+        from: 'MyDyno',
         to: req.body.email,
         subject: 'Email Verification',
         html: 
