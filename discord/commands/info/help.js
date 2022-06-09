@@ -46,6 +46,10 @@ module.exports = {
             }
         })
 
+        let token = process.env.token || client.config.betaToken
+        let botInvite;
+        if(token == process.env.token){botInvite = client.config.botInvite}
+        else if(token == client.config.betaToken){botInvite = client.config.betaBotInvite}
         
         let helpEmbed = new Discord.MessageEmbed()
             .setTitle(client.user.username + ' | Help')
@@ -57,7 +61,7 @@ module.exports = {
                 {
                     name: 'Links:',
                     value:
-                        ':small_blue_diamond: [Invite](' + client.config.botInvite + ')' + '\n' +
+                        ':small_blue_diamond: [Invite](' + botInvite + ')' + '\n' +
                         ':small_blue_diamond: [Vote - Top.gg](' + client.config.voteBot + ')' + '\n' +
                         ':small_blue_diamond: [Support Server](' + client.config.supportServer + ')' + '\n'
                 }

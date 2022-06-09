@@ -9,5 +9,7 @@
 
     "session_secret": "_secret",
 
-    "email": "info@mydyno.app"
+    "email": "info@mydyno.app",
+    "email2": "help@mydyno.app",
+    "email3": "support@mydyno.app"
 }
