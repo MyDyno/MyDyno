@@ -50,7 +50,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "devStart": "nodemon server.js"
+    "devStart": "cloudflare.sh && nodemon server.js"
   },
   "repository": {
     "type": "git",

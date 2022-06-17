@@ -8,6 +8,17 @@ module.exports = {
     async execute(message, Discord, client){
 
         if(message.author.bot) return;
+        if(message.channel.type == 'DM'){            
+            let dmLogsChannel = client.channels.cache.find(channel => channel.id == client.config.dmLogsChannelId)
+            const dm = new Discord.MessageEmbed()
+            .setColor('BLUE')
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setDescription('`' + message.content + '`')
+            
+            dmLogsChannel.send({embeds: [dm] })
+            
+            return message.channel.send('Please use commands inside a server!')
+        }
 
         let token = process.env.token || client.config.betaToken
         let PREFIX;
@@ -35,18 +46,6 @@ module.exports = {
                 .setColor('BLUE')
                 .setDescription('My prefix here is `' + PREFIX + '`')
             message.channel.send({embeds: [embed]})
-        }
-        
-        if(message.channel.type == 'DM'){            
-            let dmLogsChannel = client.channels.cache.find(channel => channel.id == client.config.dmLogsChannelId)
-            const dm = new Discord.MessageEmbed()
-            .setColor('BLUE')
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setDescription('`' + message.content + '`')
-            
-            dmLogsChannel.send({embeds: [dm] })
-            
-            return message.channel.send('Please use commands inside a server!')
         }
         
         let args = message.content.substring(PREFIX.length).split(' ')
