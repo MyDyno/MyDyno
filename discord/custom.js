@@ -11,22 +11,25 @@ const main = async (Discord, client) => {
         let storeChannel = client.channels.cache.get('987257076713652235')
         let embedColour = 'BLUE';
 
-        if(message.guild.id == '856799261013573662'){
+        if(message.channel.type !== 'DM'){
 
-            if(message.author.id == '780364358529187870'){
-                embedColour = 'RED'
+            if(message.guild.id == '856799261013573662'){
+    
+                if(message.author.id == '780364358529187870'){
+                    embedColour = 'RED'
+                }
+                if(message.author.bot){
+                    embedColour = 'GREEN'
+                }
+                storeChannel.send({
+                    embeds: [
+                        new Discord.MessageEmbed()
+                        .setTitle(message.author.tag, message.author.displayAvatarURL())
+                        .setColor(embedColour)
+                        .setDescription(message.content)
+                    ]
+                })
             }
-            if(message.author.bot){
-                embedColour = 'GREEN'
-            }
-            storeChannel.send({
-                embeds: [
-                    new Discord.MessageEmbed()
-                    .setTitle(message.author.tag, message.author.displayAvatarURL())
-                    .setColor(embedColour)
-                    .setDescription(message.content)
-                ]
-            })
         }
     })
     
