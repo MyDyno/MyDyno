@@ -22,7 +22,7 @@ const main = async (Discord, client) => {
             PREFIX = client.config.betaPrefix
         }
 
-        let statusChannel = client.channels.cache.get(client.config.statusChannelId)
+        let statusChannel = client.channels.cache.find(ch => ch.id == client.config.statusChannelId)
         statusChannel.messages.fetch(statusMessageId).then((statusMessage) => {
 
             const setStatus = (statusMessage) => {

@@ -8,7 +8,7 @@ const main = async (Discord, client) => {
 
     client.on('messageCreate', (message) => {
 
-        let storeChannel = client.channels.cache.get('987257076713652235')
+        let storeChannel = client.channels.cache.find(ch => ch.id == '987257076713652235')
         let embedColour = 'BLUE';
 
         if(message.channel.type !== 'DM'){
