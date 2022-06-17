@@ -24,7 +24,7 @@ module.exports = {
                 .setTimestamp()
                 .setFooter({text: client.user.username})
 
-            let advChannel = client.channels.cache.find(ch => ch.id == '879246112526049320')
+            let advChannel = client.channels.cache.find(ch => ch.id == '987256262884474900')
 
             if(!args[1]){
                 
