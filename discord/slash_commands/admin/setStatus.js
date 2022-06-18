@@ -39,7 +39,7 @@ module.exports = {
                     value:'guild_count',
                 },
                 {
-                    name: 'with ${client.users.cache.size} users!',
+                    name: 'with ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users!',
                     value:'user_count',
                 }
             )
@@ -88,7 +88,7 @@ module.exports = {
                     client.refreshUserCountStatus = false;
                 }
                 else if(defaultStatus == 'user_count'){
-                    statusMessage = `with ${client.users.cache.size} users!`
+                    statusMessage = `with ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users!`
                     client.statusType = type
                     client.refreshGuildCountStatus = false;
                     client.refreshUserCountStatus = true;

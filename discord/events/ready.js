@@ -19,7 +19,7 @@ module.exports = {
         function setUserCountStatus(){
             let status = {
                 type: client.statusType, 
-                activity: `with ${client.users.cache.size} users!`
+                activity: `with ${client.guilds.cache.reduce((a, b) => a + b.memberCount, 0)} users!`
             }
             
             client.user.setActivity(status.activity, {type: status.type});

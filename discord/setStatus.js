@@ -65,7 +65,7 @@ const main = async (Discord, client) => {
                         {name: 'Bot Prefix', value: '`' + PREFIX + '`', inline: true},
                         {name: 'Server Count', value: client.guilds.cache.size.toString(), inline: true},
                         {name: 'ㅤ', value: 'ㅤ\nㅤ', inline: true},
-                        {name: 'User Count', value: client.users.cache.size.toString(), inline: true},
+                        {name: 'User Count', value: client.guilds.cache.reduce((a, b) => a + b.memberCount, 0).toString(), inline: true},
                         {name: 'Client Events', value: 'message: `' + clientCommand + '`\n' + 'interaction: `' + clientSlashCommand + '`', inline: true},
                         {name: 'ㅤ', value: 'ㅤ\nㅤ\nㅤ', inline: true},
                         {name: 'Refresh Status', value: 'Guild: `' + client.refreshGuildCountStatus.toString().toUpperCase() + '`\n' + 'User: `' + client.refreshUserCountStatus.toString().toUpperCase() + '`', inline: true},
