@@ -21,7 +21,7 @@ async function main(){
                 "GUILD_MESSAGE_TYPING", "GUILD_VOICE_STATES", "GUILD_WEBHOOKS",
                 // "GUILD_PRESENCES"
             ],
-            partials: ["CHANNEL"]
+            partials: ["CHANNEL", "GUILD_MEMBER", "GUILD_SCHEDULED_EVENT", "MESSAGE", "REACTION", "USER"]
         }
     );
 
