@@ -75,6 +75,10 @@ app.get('/terms-of-service', (req, res) => {
     res.render('tos', {req: req, config: config})
 })
 
+app.get('/privacy-policy', (req, res) => {
+    res.render('privacy-policy', {req: req, config: config})
+})
+
 app.post('/newsletterSUB', async (req, res) => {
 
     let myModel = await newsLetterSubsModel.findOne({name: 'Website'})
