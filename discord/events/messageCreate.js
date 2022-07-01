@@ -36,7 +36,6 @@ module.exports = {
         }
         else if(token == client.config.betaToken){
             modelName = 'beta'
-            PREFIX = client.config.betaPrefix   
         }
 
         let myCommandCountModel = await commandCountModel.findOne({name: modelName})
@@ -44,7 +43,7 @@ module.exports = {
         if(message.content == '<@' + client.user.id + '>' || message.content == '<@!' + client.user.id + '>'){
             const embed = new Discord.MessageEmbed()
                 .setColor('BLUE')
-                .setDescription('My prefix here is `' + PREFIX + '`')
+                .setDescription('My prefix here is `' + PREFIX + '`\nTry: `' + PREFIX + 'help` for more info!')
             message.channel.send({embeds: [embed]})
         }
         
