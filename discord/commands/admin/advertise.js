@@ -12,7 +12,7 @@ module.exports = {
                 .setDescription(
                     'Hi there, I am a fun, game and music bot used in over `' + client.guilds.cache.size + ' servers` Try out my `music` or `game` commands `' + PREFIX + 'play` or `' + PREFIX + 'rps`! Please support us if u like it!' +
                     '\n\n' +
-                    'This message was sent to you by me `Raunak Raj#0060` **VERY SORRY IF IT LOOKS LIKE SPAM** and also to everyone from the mutual servers because we need your support to grow across servers!' + 
+                    'This message was sent to you by me `' + client.users.cache.find(u => u.id == client.config.botDeveloperId).tag + '` **VERY SORRY IF IT LOOKS LIKE SPAM** and also to everyone from the mutual servers because we need your support to grow across servers!' + 
                     '\n\n' +
                     '[Click here](' + client.config.botInvite + ') to invite me to your server! Add me to your server, try out some `music` commands, if you like it, please also recommend this bot to your friends :)'
                     
