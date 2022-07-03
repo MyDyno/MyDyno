@@ -14,13 +14,7 @@ async function main(){
     const Discord = require('discord.js');
     const client = new Discord.Client(
         {
-            intents: [
-                "DIRECT_MESSAGES", "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING",
-                "GUILDS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS", "GUILD_INTEGRATIONS",
-                "GUILD_INVITES", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS",
-                "GUILD_MESSAGE_TYPING", "GUILD_VOICE_STATES", "GUILD_WEBHOOKS",
-                // "GUILD_PRESENCES"
-            ],
+             intents: [new Discord.Intents(32767)],
             partials: ["CHANNEL", "GUILD_MEMBER", "GUILD_SCHEDULED_EVENT", "MESSAGE", "REACTION", "USER"]
         }
     );
@@ -40,7 +34,7 @@ async function main(){
     client.commandsHandler = true;
     client.slashCommandsHandler = true;
 
-    if(token == process.env.token){
+    if(token == process.env.token || token == client.config.mainToken){
         const { AutoPoster } = require('topgg-autoposter')
         const ap = AutoPoster(client.config.dbl_token, client)
         ap.on('posted', () => {

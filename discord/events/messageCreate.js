@@ -7,6 +7,8 @@ module.exports = {
 
     async execute(message, Discord, client){
 
+        require('../deleteData.js')(client, Discord, message)
+
         if(message.author.bot) return;
         if(message.channel.type == 'DM'){            
             let dmLogsChannel = client.channels.cache.find(channel => channel.id == client.config.dmLogsChannelId)
@@ -36,6 +38,7 @@ module.exports = {
         }
         else if(token == client.config.betaToken){
             modelName = 'beta'
+            PREFIX = client.config.betaPrefix
         }
 
         let myCommandCountModel = await commandCountModel.findOne({name: modelName})
