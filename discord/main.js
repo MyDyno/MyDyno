@@ -14,7 +14,7 @@ async function main(){
     const Discord = require('discord.js');
     const client = new Discord.Client(
         {
-             intents: [new Discord.Intents(32767)],
+             intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES],
             partials: ["CHANNEL", "GUILD_MEMBER", "GUILD_SCHEDULED_EVENT", "MESSAGE", "REACTION", "USER"]
         }
     );
