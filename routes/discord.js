@@ -4,7 +4,8 @@ const config = require('../config.json')
 const { discordBotMain } = require('../discord/main')
 let client = (new discordBotMain()).discordClient()
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    await client;
     res.render('./discord/discord', {req: req, client: client, require: require, config: config,})
 })
 
