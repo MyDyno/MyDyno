@@ -15,7 +15,7 @@ module.exports = {
                     value: 'messageCreate',
                 },
                 {
-                    name: 'interactionCreat', 
+                    name: 'interactionCreate', 
                     value: 'interactionCreate',
                 }
             )

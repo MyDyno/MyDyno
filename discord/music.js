@@ -9,7 +9,7 @@ const main = (Discord, client) => {
     const { DisTube } = require('distube')
     const { SpotifyPlugin } = require('@distube/spotify')
     const { SoundCloudPlugin } = require('@distube/soundcloud')
-    // const { YtDlpPlugin } = require('@distube/yt-dlp')
+    const { YtDlpPlugin } = require('@distube/yt-dlp')
 
     client.emotes = client.config.emoji
     client.distube = new DisTube(client,
@@ -21,7 +21,7 @@ const main = (Discord, client) => {
             plugins: [
                 new SpotifyPlugin({emitEventsAfterFetching: true}),
                 new SoundCloudPlugin(),
-                // new YtDlpPlugin()
+                new YtDlpPlugin()
             ],
             youtubeDL: false
         }
