@@ -60,7 +60,7 @@ const main = async (Discord, client) => {
                     .setTitle('Bot Status')
                     .setDescription('__Status:__ ' + statusTypeText + ' ' + client.user.presence.activities[0].name + '\nㅤ')
                     .addFields(
-                        {name: 'App Owner', value: '<@' + client.config.botDeveloperId + '>'.toString(), inline: true},
+                        {name: 'App Owner', value: '<@' + client.config.botDeveloperId[0] + '>'.toString(), inline: true},
                         {name: 'ㅤ', value: 'ㅤ\nㅤ', inline: true},
                         {name: 'Bot Prefix', value: '`' + PREFIX + '`', inline: true},
                         {name: 'Server Count', value: client.guilds.cache.size.toString(), inline: true},

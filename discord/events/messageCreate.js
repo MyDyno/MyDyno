@@ -62,7 +62,7 @@ module.exports = {
                 const command = require('../commands/' + folder + '/' + file)
 
                 if(args[0].toLowerCase() == command.name){
-                    if(message.author.id !== client.config.botDeveloperId){
+                    if(!client.config.botDeveloperId.includes(message.author.id)){
                         if(client.commandsHandler == false){
                             const embed = new Discord.MessageEmbed()
                                     .setColor('RED')
@@ -97,7 +97,7 @@ module.exports = {
                 if(command.alts){
                     command.alts.forEach(async (alt) => {
                         if(args[0].toLowerCase() == alt){
-                            if(message.author.id !== client.config.botDeveloperId){
+                            if(!client.config.botDeveloperId.includes(message.author.id)){
                                 if(client.commandsHandler == false){
                                     const embed = new Discord.MessageEmbed()
                                             .setColor('RED')

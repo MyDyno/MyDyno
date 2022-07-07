@@ -8,7 +8,7 @@ module.exports = {
             else return text;
         }
 
-        if (message.author.id == client.config.botDeveloperId) {
+        if (client.config.botDeveloperId.includes(message.author.id)) {
 
             try {
                 const code = args.join(" ");

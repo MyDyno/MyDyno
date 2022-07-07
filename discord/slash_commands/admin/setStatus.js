@@ -52,7 +52,7 @@ module.exports = {
 
     async execute(Discord, client, interaction){
 
-        if(interaction.user.id == client.config.botDeveloperId){
+        if(client.config.botDeveloperId.includes(interaction.user.id)){
 
             let type = interaction.options.getString('type')
             let defaultStatus = interaction.options.getString('default-status')

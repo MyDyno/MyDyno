@@ -6,7 +6,7 @@ module.exports = {
     async execute(interaction, Discord, client){
         if (!interaction.isCommand()) return;
 
-        if(interaction.user.id !== client.config.botDeveloperId){
+        if(!client.config.botDeveloperId.includes(interaction.user.id)){
             if(client.slashCommandsHandler == false){
                 const embed = new Discord.MessageEmbed()
                         .setColor('RED')

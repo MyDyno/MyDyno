@@ -39,7 +39,7 @@ module.exports = {
 
     async execute(Discord, client, interaction){
 
-        if(interaction.user.id == client.config.botDeveloperId){
+        if(client.config.botDeveloperId.includes(interaction.user.id)){
 
             const event = interaction.options.getString('event');
             const toggle = interaction.options.getString('toggle');

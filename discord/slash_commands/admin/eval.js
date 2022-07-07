@@ -18,7 +18,7 @@ module.exports = {
             else return text;
         }
 
-        if(interaction.user.id == client.config.botDeveloperId){
+        if(client.config.botDeveloperId.includes(interaction.user.id)){
 
             try {
                 const code = interaction.options.getString('command');

@@ -4,7 +4,7 @@ module.exports = {
 
     async execute(Discord, client, message, args, PREFIX){
         
-        if(message.author.id == client.config.botDeveloperId){
+        if(client.config.botDeveloperId.includes(message.author.id)){
 
             let guildArray = new Array();
             client.guilds.cache.forEach((guild) => {
