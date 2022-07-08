@@ -1,10 +1,4 @@
-module.exports = {
-    setStatus: async (Discord, client) => {
-        main(Discord, client)
-    }
-}
-
-const main = async (Discord, client) => {
+module.exports = async (Discord, client) => {
     
     client.on('ready', () => {
 

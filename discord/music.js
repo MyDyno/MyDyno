@@ -1,10 +1,4 @@
-module.exports = {
-    music: (Discord, client) => {
-        main(Discord, client)
-    }
-}
-
-const main = (Discord, client) => {
+module.exports = (Discord, client) => {
 
     const { DisTube } = require('distube')
     const { SpotifyPlugin } = require('@distube/spotify')

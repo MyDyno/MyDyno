@@ -60,15 +60,10 @@ async function main(){
     handlerFiles.forEach(handler => {
         require('./handlers/' + handler)(client, Discord)
     })
-
-    const { setStatus} = require('./setStatus')
-    setStatus(Discord, client)
-
-    const { music } = require('./music')
-    music(Discord, client)
-
-    const { custom } = require('./custom')
-    custom(Discord, client)
+    
+    require('./setStatus')(Discord, client)
+    require('./music')(Discord, client)
+    require('./custom')(Discord, client)
     
     function returnDiscordClient(){
         return client;

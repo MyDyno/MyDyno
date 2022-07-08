@@ -203,7 +203,7 @@ input:checked + .slider:before {
                         <div class="text-container">
                             <h1><span class="turquoise">MyDyno</span></h1>
                             <p class="p-large">A Game + Economy + AI chatbot to play games on Discord!</p>
-                            <p class="p-large">Used in <%= client.guilds.cache.size %>+ servers!</p>
+                            <p class="p-large">Playing with <%= client.guilds.cache.reduce((a, b) => a + b.memberCount, 0) %>+ users in <%= client.guilds.cache.size %>+ servers!</p>
                             <a class="btn-solid-lg page-scroll" href="/discord/invite">Invite Bot</a>
                             <a class="btn-solid-lg page-scroll" href="/discord/support">Support</a>
                         </div> <!-- end of text-container -->
