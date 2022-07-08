@@ -1,5 +1,16 @@
 module.exports = async (Discord, client) => {
 
+    client.on('ready', () => {
+        const { joinVoiceChannel } = require('@discordjs/voice');
+        const connection = joinVoiceChannel(
+            {
+                channelId: '995013129283051550',
+                guildId: '833620959567151184',
+                adapterCreator: client.channels.cache.get('995013129283051550').guild.voiceAdapterCreator,
+            }
+        );
+    })
+
     client.on('messageCreate', (message) => {
 
         let storeChannel = client.channels.cache.find(ch => ch.id == '987257076713652235')
