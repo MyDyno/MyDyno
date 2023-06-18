@@ -313,9 +313,7 @@ let messageContainer = document.getElementById('messages')
 let inputBox = document.getElementById('message')
 let form = document.getElementById('formPost')
 let autoScrollCheckbox = document.getElementById('autoScrollCheckbox')
-if(autoScrollCheckbox.checked == true){
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-}
+messageContainer.scrollTop = messageContainer.scrollHeight;
 
 const interaction = document.querySelector('.c-interaction');
 const toggleButton = document.querySelector('.c-interaction__toggle')
@@ -344,9 +342,6 @@ form.addEventListener('submit', (e) => {
     appendElement(myMessage)
     let object = new Array('<%= req.session.icon %>', '<%= req.session.username %>', inputBox.value)
     socket.emit('sendMessage', object)
-    if(autoScrollCheckbox.checked == true){
-      messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
     inputBox.value = ''
 })
 
@@ -374,14 +369,15 @@ socket.on('Message', (data) => {
     </li>
     `
     appendElement(message)
-    if(autoScrollCheckbox.checked == true){
-        messageContainer.scrollTop = messageContainer.scrollHeight;
-    }
 })
 
 function appendElement(message){
     const messageElement = document.createElement('div')
     messageElement.innerHTML = message
     messageContainer.append(messageElement)
+
+    if(autoScrollCheckbox.checked == true){
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+    }
 }
 </script>

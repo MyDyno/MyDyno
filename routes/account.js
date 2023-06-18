@@ -3,7 +3,7 @@ const app = express.Router()
 const User = require('../models/account/user')
 const config = require('../config.json')
 const nodemailer = require('nodemailer')
-let transporter = nodemailer.createTransport({service: 'gmail', auth: {user: config.MyDyno_User, pass: config.MyDyno_Pass}});
+let transporter = nodemailer.createTransport({service: 'gmail', auth: {user: config.Letbyte_User, pass: config.Letbyte_Pass}});
 
 const profileAuth = (req, res, next) => {
     if(req.session.isAuth){
@@ -134,7 +134,7 @@ function registerNext(req, res){
     let randomCode = Math.floor(Math.random() * 999999) + 111111;
 
     let mailOptions = {
-        from: 'MyDyno',
+        from: 'Letbyte',
         to: req.body.email,
         subject: 'Email Verification',
         html: 
@@ -197,7 +197,7 @@ function registerNext(req, res){
                             </tr>
                             <tr>
                                 <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 40px 30px; border-radius: 0px 0px 4px 4px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
-                                    <p style="margin: 0;">MyDyno</p>
+                                    <p style="margin: 0;">Letbyte</p>
                                 </td>
                             </tr>
                         </table>

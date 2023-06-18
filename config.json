@@ -1,15 +1,14 @@
 {
     "mongodb_url": "mongodb+srv://raunakrajadh:GObdduaH4sWY2Dru@mydyno.9n669.mongodb.net/data",
     "socket_url": "",
+    
     "defaultIcon": "https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png",
-    "mydynoIcon": "https://images.discordapp.net/avatars/833607908104732672/79f05ffee31a963cdf03ccbf8d1774de.png?size=128",
+    "letbyteIcon": "https://images.discordapp.net/avatars/833607908104732672/79f05ffee31a963cdf03ccbf8d1774de.png?size=128",
 
-    "MyDyno_User": "mydyno.xyz@gmail.com",
-    "MyDyno_Pass": "nabwxoobzkzcbtjg",
+    "Letbyte_User": "mydyno.xyz@gmail.com",
+    "Letbyte_Pass": "nabwxoobzkzcbtjg",
 
     "session_secret": "_secret",
 
-    "email": "info@mydyno.app",
-    "email2": "help@mydyno.app",
-    "email3": "support@mydyno.app"
+    "email": "info@letbyte.app"
 }

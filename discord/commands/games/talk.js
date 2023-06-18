@@ -1,5 +1,4 @@
 const Chatbot = require('discord-chatbot')
-const chatbot = new Chatbot({name: 'MyDyno', gender: 'Male'})
 
 module.exports = {
     name: 'talk',
