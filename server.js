@@ -62,7 +62,7 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use(subdomain('discord', discordRouter.app));
+// app.use(subdomain('discord', discordRouter.app));
 // app.use('/discord', discordRouter.app)
 app.get('/discord', (req, res) => {res.redirect('https://skibot.letbyte.app')})
 app.use('/chat', chatRouter.app)
