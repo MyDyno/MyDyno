@@ -22,7 +22,7 @@ async function startupCmd(){
 }
 startupCmd()
 
-const discordRouter = require('./routes/discord')
+// const discordRouter = require('./routes/discord')
 const chatRouter = require('./routes/chat')
 const accountRouter = require('./routes/account')
 const novelcovidRouter = require('./routes/novelcovid')
